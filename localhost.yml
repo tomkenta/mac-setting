@@ -3,6 +3,7 @@
   gather_facts: no
   become: no
   roles:
+    - osx
     - dotfiles
     - homebrew
     - homebrew_cask
