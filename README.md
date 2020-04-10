@@ -16,3 +16,9 @@ As for ansible,
 once you see "chenged" for one , you can use it already. 
 
 so you can start do setting on each apps. 
+
+## Alfred
+begin setup -> 
+
+## google chrome 
+open -> google account login -> import bookmarks -> import extensions
