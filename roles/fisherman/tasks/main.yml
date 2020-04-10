@@ -1,9 +1,10 @@
 - block:
 
   - name: Install fisherman
-  - get_url:
+    get_url:
       url: https://git.io/fisher
       dest: ~/.config/fish/functions/fisher.fish
 
   tags:
     - fisherman
+
