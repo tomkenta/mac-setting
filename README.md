@@ -9,8 +9,9 @@ sh ./setting.sh
 
 ex.
 1. System Preferrence > Keyboard > modifier key > swap caps and control
+2. System Preferrence > Accecitbilty > Keyboard > Trackpad option > ennable dragging > without drac lock  
 
-2. do others related to your job
+others,. do others related to your job
 
 comments -
 As for ansible, 
@@ -24,12 +25,36 @@ begin setup ->
 ## rectancgle (spectacle)
 open
 
+## google japanese ime
+system preferrence >  keyboard > input source > + > google hiragana > OK 
+you can now change by ctrl + space
+
+## karabiner-element
+open 
+function key > use F1, F2 as function key
+simple 
+
+simple modification
+caps / ctrl swap
+
+complex > add rule > import more from network > serach japanese > import  For Japanese （日本語環境向けの設定） (rev 5)
+add
+- コマンドキーを単体で押したときに、英数・かなキーを送信する。（左コマンドキーは英数、右コマンドキーはかな） (rev 3)
+- escキーを押したときに、英数キーも送信する（vim用）
+- Ctrl+[を押したときに、escキーと英数キーを送信する
 
 
+once open ( swap ctrl / caps will be removed)
+      
 ## google chrome 
 open -> google account login -> import bookmarks -> import extensions
 
-## 
+## scroll
+https://ryanhanson.dev/scroll  > open > system prefrence > sctuiry > accecibilty >  tick it 
+
+tap scroll on nav bar > scroll with one finger > hold 
+> lunch on login
 
 ## Clound Strage Link
 (BOX/DropBox) 
+box share ( can cask)
