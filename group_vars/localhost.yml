@@ -27,7 +27,8 @@ homebrew_cask_packages:
   - name: postman
   - name: sequel-pro-nightly
   - name: skitch
-  - name: spectacle
+  - name: rectangle
+  # - name: spectacle
   - name: toggl
   # - name: slack
   - name: vagrant
@@ -56,8 +57,8 @@ homebrew_packages:
   - name: vim
   - name: wget
 dot_files:
-  # - name: .bash_profile
-  # - name: .bashrc
+  - name: .bash_profile
+  - name: .bashrc
   # - name: .tmux.conf
   - name: .vimrc
   - name: .gitconfig
