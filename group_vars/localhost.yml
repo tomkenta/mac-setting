@@ -63,4 +63,5 @@ dot_files:
   - name: .vimrc
   - name: .gitconfig
   - name: .gitattributes
+  - name: .gitignore_global
 
