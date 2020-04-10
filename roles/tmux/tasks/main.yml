@@ -1,0 +1,24 @@
+- block:
+
+  - name: tpm
+    git:
+      repo: https://github.com/tmux-plugins/tpm
+      dest: ~/.tmux/plugins/tpm
+
+  - name: tmux-battery
+    git:
+      repo: https://github.com/tmux-plugins/tmux-battery
+      dest: ~/.tmux/plugins/tmux-battery
+
+  - name: tmux-cpu
+    git:
+      repo: https://github.com/tmux-plugins/tmux-cpu
+      dest: ~/.tmux/plugins/tmux-cpu
+
+  - name: tmux-resurrect
+    git:
+      repo: https://github.com/tmux-plugins/tmux-resurrect
+      dest: ~/.tmux/plugins/tmux-resurrect
+
+  tags:
+    - tmux
