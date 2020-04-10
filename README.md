@@ -9,6 +9,7 @@ sh ./setting.sh
 
 ex.
 1. System Preferrence > Keyboard > modifier key > swap caps and control
+
 2. do others related to your job
 
 comments -
@@ -20,5 +21,15 @@ so you can start do setting on each apps.
 ## Alfred
 begin setup -> 
 
+## rectancgle (spectacle)
+open
+
+
+
 ## google chrome 
 open -> google account login -> import bookmarks -> import extensions
+
+## 
+
+## Clound Strage Link
+(BOX/DropBox) 
