@@ -1,0 +1,17 @@
+- block:
+
+  - name: checkout dotfiles
+    git:
+      repo: https://github.com/tomkenta/dotfiles.git
+      dest: ~/work/settings/dotfiles
+
+  - name: create symlinks
+    file:
+      src: ~/work/settings/dotfiles/{{ item.name }}
+      dest: ~/{{ item.name }}
+      state: link
+      force: yes
+    with_items: '{{ dot_files }}'
+
+  tags:
+    - dotfiles

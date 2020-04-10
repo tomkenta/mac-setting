@@ -1,0 +1,63 @@
+homebrew_taps:
+  - heroku/brew
+  - homebrew/bundle
+  - homebrew/cask
+  - homebrew/core
+  - heroku/brew
+homebrew_cask_packages:
+  - name: alfred
+  - name: appcleaner
+  - name: bartender
+  - name: bitwarden
+  - name: clipy
+  - name: cyberduck
+  - name: docker
+  - name: drawio
+  - name: figma
+  - name: firefox
+  - name: google-chrome
+  - name: google-japanese-ime
+  - name: hyper
+  - name: hyperswitch
+  - name: karabiner-elements
+  # - name: microsoft-teams
+  # - name: microsoft-office
+  - name: ngrok
+  - name: notable
+  - name: postman
+  - name: sequel-pro-nightly
+  - name: skitch
+    name: spectacle
+    name: toggl
+  # - name: slack
+  - name: vagrant
+  - name: virtualbox
+  - name: visual-studio-code
+  - name: viber
+  - name: zoom
+homebrew_packages:
+  - name: ansible
+  - name: awscli
+  - name: bash-completion
+  - name: bitwarden-cli
+  - name: docker
+  - name: fish
+  - name: fzf
+  - name: git
+  - name: heroku
+  - name: hub
+  - name: jq
+  - name: mas
+  # - name: terraform
+  - name: tfenv
+  - name: tig
+  - name: tree
+  - name: tmux
+  - name: vim
+  - name: wget
+dot_files:
+  # - name: .bash_profile
+  # - name: .bashrc
+  # - name: .tmux.conf
+  - name: .vimrc
+

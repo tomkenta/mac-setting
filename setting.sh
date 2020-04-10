@@ -12,8 +12,8 @@ xcode-select --install
 brew install ansible
 
 ## clone repo
-git clone {repo_path} ${ANSIBLE_PATH}
+git clone https://github.com/tomkenta/mac-setting.git ${ANSIBLE_PATH}
 
 ## ansible
-## cd ${ANSIBLE_PATH}
-## ansible-playbook -i inventory/localhost localhost.yml
+cd ${ANSIBLE_PATH}
+ansible-playbook -i inventory/localhost localhost.yml
