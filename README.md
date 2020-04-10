@@ -10,3 +10,9 @@ sh ./setting.sh
 ex.
 1. System Preferrence > Keyboard > modifier key > swap caps and control
 2. do others related to your job
+
+comments -
+As for ansible, 
+once you see "chenged" for one , you can use it already. 
+
+so you can start do setting on each apps. 
