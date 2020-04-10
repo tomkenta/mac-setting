@@ -27,14 +27,14 @@ homebrew_cask_packages:
   - name: postman
   - name: sequel-pro-nightly
   - name: skitch
-    name: spectacle
-    name: toggl
+  - name: spectacle
+  - name: toggl
   # - name: slack
   - name: vagrant
   - name: virtualbox
   - name: visual-studio-code
   - name: viber
-  - name: zoom
+  # - name: zoomus
 homebrew_packages:
   - name: ansible
   - name: awscli
@@ -60,4 +60,6 @@ dot_files:
   # - name: .bashrc
   # - name: .tmux.conf
   - name: .vimrc
+  - name: .gitconfig
+  - name: .gitattributes
 
