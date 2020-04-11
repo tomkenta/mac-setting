@@ -67,15 +67,19 @@ now only I know this way so far,
 - connected with google account ( personal) 
 
 so just only to download them by hand.
-
-- Bookmark Sidebar ★★★ ( serach bookmarks )
+- Web Serach Navigator ★★★ ( jk navigation is really strong in google seach)
+- Bookmark Sidebar ★★★ ( serach bookmarks ) 
+└ setting > keyborad short cut > cmd + shift + D
+└ setting > open side bar > click on icon, position left.
+└ ( later you can export setting)
 - Full Page Screen Capture ★
 - Katalon Recorder ★★★ (test tool w/ setting file)
+└ open file from cloud strage.
 - Proxy SwitchySharp ★★★  (proxy manger w/ setting file)
 - momentum ★★ (refreshing first page)
-- Web Serach Navigator ★★★ ( jk navigation is really strong in google seach)
 - Web Scraper ★ (it is easliy scrape file)
-
+- Vimunium ★ ( browsing in vim way)
+└ exculue j,k in google search so j, k and /can be used by Web Serach Navigator
 
 ## scroll
 https://ryanhanson.dev/scroll  > open > system prefrence > sctuiry > accecibilty >  tick it 
