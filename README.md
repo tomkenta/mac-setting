@@ -90,3 +90,6 @@ tap scroll on nav bar > scroll with one finger > hold
 ## Clound Strage Link
 (BOX/DropBox) 
 box share ( can cask)
+
+## clippy
+open 
