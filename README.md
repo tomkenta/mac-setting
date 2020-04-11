@@ -49,6 +49,34 @@ once open ( swap ctrl / caps will be removed)
 ## google chrome 
 open -> google account login -> import bookmarks -> import extensions
 
+- import bookmarks 
+
+imort exported html from cloud strage ( job , personal)
+or 
+connected with google account ( personal) 
+
+### imort exported html from cloud strage ( job , personal)
+see https://support.google.com/chrome/answer/96816?hl=ja
+
+### connected with google account ( personal) 
+just login with your google account and turn on sync
+
+- import extension
+
+now only I know this way so far, 
+- connected with google account ( personal) 
+
+so just only to download them by hand.
+
+- Bookmark Sidebar ★★★ ( serach bookmarks )
+- Full Page Screen Capture ★
+- Katalon Recorder ★★★ (test tool w/ setting file)
+- Proxy SwitchySharp ★★★  (proxy manger w/ setting file)
+- momentum ★★ (refreshing first page)
+- Web Serach Navigator ★★★ ( jk navigation is really strong in google seach)
+- Web Scraper ★ (it is easliy scrape file)
+
+
 ## scroll
 https://ryanhanson.dev/scroll  > open > system prefrence > sctuiry > accecibilty >  tick it 
 
