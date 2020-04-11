@@ -9,6 +9,7 @@ homebrew_cask_packages:
   - name: appcleaner
   - name: bartender
   - name: bitwarden
+  - name: box-drive
   - name: clipy
   - name: cyberduck
   - name: docker
@@ -19,6 +20,7 @@ homebrew_cask_packages:
   - name: google-japanese-ime
   - name: hyper
   - name: hyperswitch
+  - name: hugo
   - name: karabiner-elements
   # - name: microsoft-teams
   # - name: microsoft-office
