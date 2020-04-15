@@ -55,6 +55,8 @@ homebrew_packages:
   - name: hub
   - name: jq
   - name: mas
+  - name: ghq
+  - name: peco
   # - name: terraform
   - name: tfenv
   - name: tig
@@ -65,7 +67,7 @@ homebrew_packages:
 dot_files:
   - name: .bash_profile
   - name: .bashrc
-  # - name: .tmux.conf
+  - name: .tmux.conf
   - name: .vimrc
   - name: .gitconfig
   - name: .gitattributes
