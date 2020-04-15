@@ -72,4 +72,5 @@ dot_files:
   - name: .gitconfig
   - name: .gitattributes
   - name: .gitignore_global
+  - name: .hyper.js
 
