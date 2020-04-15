@@ -37,6 +37,7 @@ homebrew_cask_packages:
   - name: virtualbox
   - name: visual-studio-code
   - name: viber
+  - name: java
   # - name: zoomus
 homebrew_packages:
   - name: ansible
@@ -58,7 +59,6 @@ homebrew_packages:
   - name: tmux
   - name: vim
   - name: wget
-  - name: java
 dot_files:
   - name: .bash_profile
   - name: .bashrc
