@@ -38,6 +38,7 @@ homebrew_cask_packages:
   - name: visual-studio-code
   - name: viber
   - name: java
+  #- name: phpstorm
   # - name: zoomus
 homebrew_packages:
   - name: ansible
