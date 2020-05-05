@@ -2,6 +2,7 @@ homebrew_taps:
   - heroku/brew
   - homebrew/bundle
   - homebrew/cask
+  - homebrew/cask-fonts
   - homebrew/core
   - heroku/brew
 homebrew_cask_packages:
@@ -38,7 +39,6 @@ homebrew_cask_packages:
   - name: visual-studio-code
   - name: viber
   - name: java
-  - name: java
   - name: jmeter
   #- name: phpstorm
   # - name: zoomus
@@ -64,6 +64,8 @@ homebrew_packages:
   - name: tmux
   - name: vim
   - name: wget
+  - name: anyenv
+  - name: git-lfs
 dot_files:
   - name: .bash_profile
   - name: .bashrc
