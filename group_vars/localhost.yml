@@ -67,6 +67,8 @@ homebrew_packages:
   - name: wget
   - name: anyenv
   - name: git-lfs
+  - name: nkf
+  - name: ripgrep
 dot_files:
   - name: .bash_profile
   - name: .bashrc
