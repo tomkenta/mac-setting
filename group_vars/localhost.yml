@@ -41,6 +41,7 @@ homebrew_cask_packages:
   - name: java
   - name: jmeter
   #- name: phpstorm
+  #- name: intellij-idea-ce
   # - name: zoomus
   - name: font-hackgen
   - name: dash
