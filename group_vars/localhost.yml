@@ -45,6 +45,7 @@ homebrew_cask_packages:
   # - name: zoomus
   - name: font-hackgen
   - name: dash
+  - name: katalon-studio
 homebrew_packages:
   - name: ansible
   - name: awscli
