@@ -48,6 +48,20 @@
       type: int
       value: 3
 
+  - name: 右下でスクリーンセーバー開始1
+    osx_defaults:
+      domain: com.apple.dock.plist
+      key: wvous-br-corner
+      type: int
+      value: 5
+
+  - name: 右下でスクリーンセーバー開始2
+    osx_defaults:
+      domain: com.apple.dock.plist
+      key: wvous-br-modifier
+      type: int
+      value: 0
+
   - name: 現在の設定ファイルのバックアップ
     shell: 'defaults read > after_defaults'
 
