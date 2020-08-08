@@ -24,7 +24,6 @@ homebrew_cask_packages:
   - name: brave-browser
   - name: appcleaner
   - name: bartender
-  - name: box-drive
   - name: cyberduck
   - name: drawio
   - name: figma
@@ -33,6 +32,7 @@ homebrew_cask_packages:
   - name: vagrant
   - name: virtualbox
   - name: sequel-pro
+  # - name: box-drive
   # - name: microsoft-teams
   # - name: microsoft-office
   # - name: zoomus
