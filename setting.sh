@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ANSIBLE_PATH=~/work/settings/mac-setting
+## conform to ghq path setting
+ANSIBLE_PATH=~/work/src/github.com/tomkenta/mac-setting
 
 ## command line tools
 xcode-select --install

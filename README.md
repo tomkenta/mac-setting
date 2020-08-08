@@ -15,9 +15,34 @@ others,. do others related to your job
 
 comments -
 As for ansible, 
-once you see "chenged" for one , you can use it already. 
+once you see "chenged" for one , you can use it already.
 
-so you can start do setting on each apps. 
+so you can start do setting on each apps.
+
+## directory structure
+```
+└->$ tree -L 1
+.
+├── Applications (local applications)
+├── Box (need to install box-drive, this is where backup local files)
+├── Desktop (We don't use , don't wanna mess here)
+├── Documents 
+├── Downloads
+├── Library
+├── Movies
+├── Music
+├── Pictures
+├── Postman
+├── Public
+├── VirtualBox\ VMs
+├── code
+├── vbox
+└── work
+
+(DONT PUT files in home directory except dotfiles))
+```
+
+
 
 ## Alfred
 begin setup -> 
