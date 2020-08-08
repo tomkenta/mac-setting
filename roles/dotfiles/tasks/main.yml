@@ -3,11 +3,11 @@
   - name: checkout dotfiles
     git:
       repo: https://github.com/tomkenta/dotfiles.git
-      dest: ~/work/settings/dotfiles
+      dest: ~/work/src/github.com/tomkenta/dotfiles
 
   - name: create symlinks
     file:
-      src: ~/work/settings/dotfiles/{{ item.name }}
+      src:  ~/work/src/github.com/tomkenta/dotfiles/{{ item.name }}
       dest: ~/{{ item.name }}
       state: link
       force: yes
@@ -15,7 +15,7 @@
 
   - name: create symlink for karabiner
     file:
-      src: ~/work/settings/dotfiles/.config/karabiner/karabiner.json
+      src:  ~/work/src/github.com/tomkenta/dotfiles/.config/karabiner/karabiner.json
       dest: ~/.config/karabiner/karabiner.json
       state: link
       force: yes
