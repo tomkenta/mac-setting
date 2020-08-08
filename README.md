@@ -46,6 +46,7 @@ so you can start do setting on each apps.
 
 ## Alfred
 begin setup -> 
+see for backup and retrive settiing https://www.alfredapp.com/help/advanced/sync/
 
 ## rectancgle (spectacle)
 open
