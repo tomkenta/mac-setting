@@ -94,18 +94,31 @@ now only I know this way so far,
 
 so just only to download them by hand.
 - Web Serach Navigator ★★★ ( jk navigation is really strong in google seach)
+  https://chrome.google.com/webstore/detail/web-search-navigator/cohamjploocgoejdfanacfgkhjkhdkek
 - Bookmark Sidebar ★★★ ( serach bookmarks ) 
+  https://chrome.google.com/webstore/detail/bookmark-sidebar/jdbnofccmhefkmjbkkdkfiicjkgofkdh?hl=en
 └ setting > keyborad short cut > cmd + shift + D
 └ setting > open side bar > click on icon, position left.
 └ ( later you can export setting)
 - Full Page Screen Capture ★
+　https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl?hl=en
 - Katalon Recorder ★★★ (test tool w/ setting file)
+ https://chrome.google.com/webstore/detail/katalon-recorder-selenium/ljdobmomdgdljniojadhoplhkpialdid
 └ open file from cloud strage.
-- Proxy SwitchySharp ★★★  (proxy manger w/ setting file)
-- momentum ★★ (refreshing first page)
-- Web Scraper ★ (it is easliy scrape file)
+
+- Proxy SwitchyOmega ★★★  (proxy manger w/ setting file)
+https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=en
+- Instant Data scraper ★ (it is easliy scrape file)
+ https://chrome.google.com/webstore/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah?hl=en
 - Vimunium ★ ( browsing in vim way)
+https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en
 └ exculue j,k in google search so j, k and /can be used by Web Serach Navigator
+- grammaly
+ https://chrome.google.com/webstore/detail/grammarly-for-chrome/kbfnbcaeplbcioakkpcpgfkobkghlhen?hl=en
+- website blocker
+ https://chrome.google.com/webstore/detail/block-site-website-blocke/eiimnmioipafcokbfikbljfdeojpcgbh
+- daily.dev
+https://chrome.google.com/webstore/detail/dailydev-news-for-busy-de/jlmpjdjjbgclbocgajdjefcidcncaied?hl=en
 
 ## scroll
 https://ryanhanson.dev/scroll  > open > system prefrence > sctuiry > accecibilty >  tick it 
