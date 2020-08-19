@@ -3,9 +3,6 @@
 ## conform to ghq path setting
 ANSIBLE_PATH=~/work/src/github.com/tomkenta/mac-setting
 
-## command line tools
-xcode-select --install
-
 ## install homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
