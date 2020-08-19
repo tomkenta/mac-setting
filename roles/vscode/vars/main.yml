@@ -1,4 +1,4 @@
-code_extensions:
+vscode_extensions:
   - 2gua.rainbow-brackets
   - aaron-bond.better-comments
   - abusaidm.html-snippets
@@ -22,7 +22,6 @@ code_extensions:
   - ms-vscode-remote.remote-ssh-explorer
   - ms-vscode-remote.remote-wsl
   - ms-vscode-remote.vscode-remote-extensionpack
-  - ms-vscode.Go
   - octref.vetur
   - oderwat.indent-rainbow
   - pkosta2005.heroku-command
