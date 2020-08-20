@@ -33,6 +33,7 @@ homebrew_cask_packages:
   - name: virtualbox
   - name: sequel-pro
   # - name: box-drive
+  # - name: box-notes
   # - name: microsoft-teams
   # - name: microsoft-office
   # - name: zoomus
