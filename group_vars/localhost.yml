@@ -9,6 +9,7 @@ homebrew_cask_packages:
   - name: karabiner-elements
   - name: alfred
   - name: rectangle
+  - name: google-japanese-ime
   - name: google-chrome
   - name: hyper
   - name: visual-studio-code
@@ -16,22 +17,22 @@ homebrew_cask_packages:
   - name: viber
   - name: toggl
   - name: postman
-  - name: phpstorm
-  - name: intellij-idea-ce
-  - name: dash
-  - name: katalon-studio
-  - name: docker
-  - name: brave-browser
+  # - name: phpstorm
+  # - name: intellij-idea-ce
+  # - name: dash
+  # - name: katalon-studio
   - name: appcleaner
   - name: bartender
   - name: cyberduck
-  - name: drawio
   - name: figma
   - name: firefox
-  - name: hyperswitch
-  - name: vagrant
-  - name: virtualbox
+  # - name: vagrant
+  # - name: virtualbox
   - name: sequel-pro
+  - name: the-unarchiver
+  - name: charles
+  - name: docker
+  # - name: burp-suite
   # - name: box-drive
   # - name: box-notes
   # - name: microsoft-teams
@@ -63,6 +64,10 @@ homebrew_packages:
   - name: anyenv
   - name: nkf
   - name: hugo
+  - name: q
+  - name: yarn
+  - name: gnu-sed
+  - name: colordiff
   # - name: heroku
   # - name: bitwarden-cli
   # - name: terraform
