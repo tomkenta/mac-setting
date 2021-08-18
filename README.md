@@ -49,7 +49,7 @@ begin setup ->
 see for backup and retrive settiing https://www.alfredapp.com/help/advanced/sync/
 
 ## rectancgle (spectacle)
-open
+open -> import the RectangleConfig.json
 
 ## google japanese ime
 system preferrence >  keyboard > input source > + > google hiragana > OK 
