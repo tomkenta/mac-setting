@@ -45,8 +45,14 @@ so you can start do setting on each apps.
 
 
 ## Alfred
-begin setup -> 
+begin setup -> activate powerpack ( serach activation code there ) -> open alfred preference -> advanced -> Syncing -> set preference folder -> setting file "alfred/Alfred.alfredpreferences"
+
+turn off spotlight hotkey （spotligt -> turn off the shortcut)
+change hotkey to cmd + space
+
 see for backup and retrive settiing https://www.alfredapp.com/help/advanced/sync/
+
+
 
 ## rectancgle (spectacle)
 open -> import the RectangleConfig.json
@@ -56,7 +62,9 @@ system preferrence >  keyboard > input source > + > google hiragana > OK
 you can now change by ctrl + space
 
 ## karabiner-element
-open 
+open is just ( .config/karabiner will work soon)
+
+--- outdated
 function key > use F1, F2 as function key
 simple 
 
@@ -68,6 +76,7 @@ add
 - コマンドキーを単体で押したときに、英数・かなキーを送信する。（左コマンドキーは英数、右コマンドキーはかな） (rev 3)
 - escキーを押したときに、英数キーも送信する（vim用）
 - Ctrl+[を押したときに、escキーと英数キーを送信する
+---
 
 
 once open ( swap ctrl / caps will be removed)
@@ -112,7 +121,7 @@ https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgk
  https://chrome.google.com/webstore/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah?hl=en
 - Vimunium ★ ( browsing in vim way)
 https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en
-└ exculue j,k in google search so j, k and /can be used by Web Serach Navigator
+└ exclude j,k in google search so j, k and /can be used by Web Serach Navigator
 - grammaly
  https://chrome.google.com/webstore/detail/grammarly-for-chrome/kbfnbcaeplbcioakkpcpgfkobkghlhen?hl=en
 - website blocker
@@ -130,5 +139,4 @@ tap scroll on nav bar > scroll with one finger > hold
 (BOX/DropBox) 
 box share ( can cask)
 
-## clippy
-open 
+
