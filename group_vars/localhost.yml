@@ -32,6 +32,7 @@ homebrew_cask_packages:
   - name: the-unarchiver
   - name: charles
   - name: docker
+  - name: slack
   # - name: burp-suite
   # - name: box-drive
   # - name: box-notes
@@ -40,7 +41,6 @@ homebrew_cask_packages:
   # - name: zoomus
   # - name: ngrok
   # - name: skitch
-  # - name: slack
   # - name: bitwarden
 homebrew_packages:
   - name: ansible
@@ -57,7 +57,6 @@ homebrew_packages:
   - name: tmux
   - name: awscli
   - name: bash-completion
-  - name: docker
   - name: jq
   - name: mas
   - name: wget
@@ -68,6 +67,7 @@ homebrew_packages:
   - name: yarn
   - name: gnu-sed
   - name: colordiff
+  # - name: docker
   # - name: heroku
   # - name: bitwarden-cli
   # - name: terraform
