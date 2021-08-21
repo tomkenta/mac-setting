@@ -17,9 +17,10 @@ homebrew_cask_packages:
   - name: viber
   - name: toggl
   - name: postman
+  - name: openinterminal
   # - name: phpstorm
   # - name: intellij-idea-ce
-  # - name: dash
+  - name: dash
   # - name: katalon-studio
   - name: appcleaner
   - name: bartender
