@@ -41,7 +41,15 @@ so you can start do setting on each apps.
 
 (DONT PUT files in home directory except dotfiles))
 ```
+## System Preferene
+Basically it can be configured in automation script , but some of them still shoud be set in GUI
 
+- Touch ID
+register your fingerpirnt
+
+tick
+[] unlock your mac
+[] password auto fill
 
 
 ## Alfred
