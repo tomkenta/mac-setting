@@ -5,8 +5,6 @@
   roles:
     - osx
     - dotfiles
-    - homebrew
-    - homebrew_cask
     - vscode
     - tmux
     - fisherman
