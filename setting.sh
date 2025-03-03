@@ -4,7 +4,7 @@
 ANSIBLE_PATH=~/work/src/github.com/tomkenta/mac-setting
 
 ## install homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 ## clone repo
 git clone https://github.com/tomkenta/mac-setting.git ${ANSIBLE_PATH}
