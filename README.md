@@ -112,11 +112,7 @@ now only I know this way so far,
 so just only to download them by hand.
 - Web Serach Navigator ★★★ ( jk navigation is really strong in google seach)
   https://chrome.google.com/webstore/detail/web-search-navigator/cohamjploocgoejdfanacfgkhjkhdkek
-- Bookmark Sidebar ★★★ ( serach bookmarks ) 
-  https://chrome.google.com/webstore/detail/bookmark-sidebar/jdbnofccmhefkmjbkkdkfiicjkgofkdh?hl=en
-└ setting > keyborad short cut > cmd + shift + D
-└ setting > open side bar > click on icon, position left.
-└ ( later you can export setting)
+- [Copy Title and Url as Markdown Style - Chrome ウェブストア](https://chromewebstore.google.com/detail/copy-title-and-url-as-mar/fpmbiocnfbjpajgeaicmnjnnokmkehil?hl=ja) ★★★ 
 - Full Page Screen Capture ★
 　https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl?hl=en
 - Katalon Recorder ★★★ (test tool w/ setting file)
