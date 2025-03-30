@@ -110,8 +110,8 @@ now only I know this way so far,
 - connected with google account ( personal) 
 
 so just only to download them by hand.
-- Web Serach Navigator ★★★ ( jk navigation is really strong in google seach)
-  https://chrome.google.com/webstore/detail/web-search-navigator/cohamjploocgoejdfanacfgkhjkhdkek
+- Google Search Keyboard Shortcuts ★★★ ( jk navigation is really strong in google seach)
+  [Google Search Keyboard Shortcuts - Chrome Web Store](https://chromewebstore.google.com/detail/google-search-keyboard-sh/iobmefdldoplhmonnnkchglfdeepnfhd)
 - [Copy Title and Url as Markdown Style - Chrome ウェブストア](https://chromewebstore.google.com/detail/copy-title-and-url-as-mar/fpmbiocnfbjpajgeaicmnjnnokmkehil?hl=ja) ★★★ 
 - Full Page Screen Capture ★
 　https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl?hl=en
