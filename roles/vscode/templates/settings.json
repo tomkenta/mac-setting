@@ -1,8 +1,7 @@
 {
-    "workbench.colorTheme": "Palenight Italic",
-    "window.zoomLevel": 1,
-    "editor.fontFamily": "'HackGen Console for Powerline',Menlo, Monaco, 'Courier New', monospace",
-    "editor.fontLigatures": null,
-    "editor.renderWhitespace": "all",
-    "svg.preview.mode": "svg"
+    "workbench.colorTheme": "Default High Contrast",
+    "security.workspace.trust.untrustedFiles": "open",
+    "window.zoomLevel": -1,
+    "workbench.sideBar.location": "right",
+    "editor.fontFamily": "'HackGen Console NF', Menlo, Monaco, 'Courier New', monospace"
 }

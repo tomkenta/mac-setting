@@ -1,146 +1,112 @@
-# Mac 用の環境構築自動化設定ファイル
-```
-curl -O -u tomkenta:{PAT} https://raw.githubusercontent.com/tomkenta/mac-setting/master/setting.sh
-chmod 755 ./setting.sh
-sh ./setting.sh 
-```
+# mac-setting — Mac キッティング自動化
 
-`sh .setting` will take 30mins - 1 hours. Do somthing else
+新しい Mac を最短で普段の作業環境にするための自動構築設定。
 
-ex.
-1. System Preferrence > Keyboard > modifier key > swap caps and control
-2. System Preferrence > Accecitbilty > Keyboard > Trackpad option > ennable dragging > without drac lock  
+対象環境: **macOS (Apple Silicon / arm64)** / Homebrew は `/opt/homebrew`。
 
-others,. do others related to your job
-
-comments -
-As for ansible, 
-once you see "chenged" for one , you can use it already.
-
-so you can start do setting on each apps.
-
-## directory structure
-```
-└->$ tree -L 1
-.
-├── Applications (local applications)
-├── Box (need to install box-drive, this is where backup local files)
-├── Desktop (We don't use , don't wanna mess here)
-├── Documents 
-├── Downloads
-├── Library
-├── Movies
-├── Music
-├── Pictures
-├── Postman
-├── Public
-├── VirtualBox\ VMs
-├── code
-├── vbox
-└── work
-
-(DONT PUT files in home directory except dotfiles))
-```
-## System Preferene
-Basically it can be configured in automation script , but some of them still shoud be set in GUI
-
-- Touch ID
-register your fingerpirnt
-
-tick
-[] unlock your mac
-[] password auto fill
-
-
-## Alfred
-begin setup -> activate powerpack ( serach activation code there ) -> open alfred preference -> advanced -> Syncing -> set preference folder -> setting file "alfred/Alfred.alfredpreferences"
-
-turn off spotlight hotkey （spotligt -> turn off the shortcut)
-change hotkey to cmd + space
-
-see for backup and retrive settiing https://www.alfredapp.com/help/advanced/sync/
-
-
-
-## rectancgle (spectacle)
-open -> import the RectangleConfig.json
-
-## google japanese ime
-system preferrence >  keyboard > input source > + > google hiragana > OK 
-you can now change by ctrl + space
-
-## karabiner-element
-open is just ( .config/karabiner will work soon)
-
---- outdated
-function key > use F1, F2 as function key
-simple 
-
-simple modification
-caps / ctrl swap
-
-complex > add rule > import more from network > serach japanese > import  For Japanese （日本語環境向けの設定） (rev 5)
-add
-- コマンドキーを単体で押したときに、英数・かなキーを送信する。（左コマンドキーは英数、右コマンドキーはかな） (rev 3)
-- escキーを押したときに、英数キーも送信する（vim用）
-- Ctrl+[を押したときに、escキーと英数キーを送信する
 ---
 
+## クイックスタート
 
-once open ( swap ctrl / caps will be removed)
-      
-## google chrome 
-open -> google account login -> import bookmarks -> import extensions
+```sh
+# 1. setting.sh を取得して実行 (Homebrew導入 → リポジトリ取得 → brew bundle → ansible)
+curl -fsSL -O https://raw.githubusercontent.com/tomkenta/mac-setting/master/setting.sh
+chmod +x ./setting.sh
+./setting.sh
+```
 
-- import bookmarks 
+> `brew bundle` のアプリ群インストールで 30分〜1時間ほどかかる。
+> その間に下記「GUIで手動設定する項目」を進めると効率的。
 
-imort exported html from cloud strage ( job , personal)
-or 
-connected with google account ( personal) 
+リポジトリは ghq root に合わせて `~/src/github.com/tomkenta/mac-setting` に取得される。
 
-### imort exported html from cloud strage ( job , personal)
-see https://support.google.com/chrome/answer/96816?hl=ja
+### 何が起きるか (setting.sh)
+1. Homebrew をインストール
+2. `brew shellenv` で PATH を通す (Apple Silicon: `/opt/homebrew`)
+3. このリポジトリを `~/src/github.com/tomkenta/mac-setting` に clone
+4. `brew bundle` で CLI / GUIアプリ / VS Code拡張を一括インストール（→ `Brewfile`）
+5. `ansible-playbook` で macOS設定・dotfiles・tmux・fisher を適用（→ `localhost.yml`）
 
-### connected with google account ( personal) 
-just login with your google account and turn on sync
+### 部分的に再実行したいとき
+```sh
+cd ~/src/github.com/tomkenta/mac-setting
+brew bundle                                   # アプリだけ追加インストール
+ansible-playbook -i inventory/localhost localhost.yml --tags dotfiles   # dotfilesだけ等
+```
 
-- import extension
+---
 
-now only I know this way so far, 
-- connected with google account ( personal) 
+## ディレクトリ構成
 
-so just only to download them by hand.
-- Google Search Keyboard Shortcuts ★★★ ( jk navigation is really strong in google seach)
-  [Google Search Keyboard Shortcuts - Chrome Web Store](https://chromewebstore.google.com/detail/google-search-keyboard-sh/iobmefdldoplhmonnnkchglfdeepnfhd)
-- [Copy Title and Url as Markdown Style - Chrome ウェブストア](https://chromewebstore.google.com/detail/copy-title-and-url-as-mar/fpmbiocnfbjpajgeaicmnjnnokmkehil?hl=ja) ★★★ 
-- Full Page Screen Capture ★
-　https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl?hl=en
-- Katalon Recorder ★★★ (test tool w/ setting file)
- https://chrome.google.com/webstore/detail/katalon-recorder-selenium/ljdobmomdgdljniojadhoplhkpialdid
-└ open file from cloud strage.
+```
+mac-setting/
+├── Brewfile          # CLI / cask / VS Code拡張 の定義 (インストールの単一の真実)
+├── setting.sh        # ブートストラップスクリプト
+├── localhost.yml     # ansible エントリ (roles: osx, dotfiles, vscode, tmux, fisherman)
+├── group_vars/       # dotfiles のリンク対象定義
+├── roles/
+│   ├── osx/          # macOSの defaults 設定
+│   ├── dotfiles/     # dotfilesリポジトリの取得とシンボリックリンク
+│   ├── vscode/       # settings/keybindings 配置・拡張インストール
+│   ├── tmux/         # tpm 等のプラグイン取得
+│   └── fisherman/    # fish プラグインマネージャ fisher の導入
+├── RectangleConfig.json
+└── alfred/           # Alfred 設定 (同期フォルダとして指定)
+```
 
-- Proxy SwitchyOmega ★★★  (proxy manger w/ setting file)
-https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=en
-- Instant Data scraper ★ (it is easliy scrape file)
- https://chrome.google.com/webstore/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah?hl=en
-- Vimunium ★ ( browsing in vim way)
-https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en
-└ exclude j,k in google search so j, k and /can be used by Web Serach Navigator
-- grammaly
- https://chrome.google.com/webstore/detail/grammarly-for-chrome/kbfnbcaeplbcioakkpcpgfkobkghlhen?hl=en
-- website blocker
- https://chrome.google.com/webstore/detail/block-site-website-blocke/eiimnmioipafcokbfikbljfdeojpcgbh
-- daily.dev
-https://chrome.google.com/webstore/detail/dailydev-news-for-busy-de/jlmpjdjjbgclbocgajdjefcidcncaied?hl=en
+dotfiles 本体は別リポジトリ: `~/src/github.com/tomkenta/dotfiles`
 
-## scroll
-https://ryanhanson.dev/scroll  > open > system prefrence > sctuiry > accecibilty >  tick it 
+---
 
-tap scroll on nav bar > scroll with one finger > hold 
-> lunch on login
+## GUIで手動設定する項目
 
-## Clound Strage Link
-(BOX/DropBox) 
-box share ( can cask)
+自動化できない（あるいは GUI が確実な）もの。
 
+### システム設定
+- **Touch ID**: 指紋を登録（Mac のロック解除 / パスワード自動入力）
+- **キーボード > 修飾キー**: Caps Lock ⇄ Control を入れ替え
+  （Karabiner でも対応するが、ログイン画面用に OS 側でも設定）
+- **トラックパッド > ドラッグ**: 3本指ドラッグ等は「アクセシビリティ > ポインタ制御 > トラックパッドオプション」
+- **コントロールセンター > バッテリー**: 「割合(%)を表示」をON（macOS 11以降は defaults で効かない）
 
+### Alfred (Powerpack)
+1. アクティベーションコードでPowerpackを有効化
+2. Preferences > Advanced > Syncing で同期フォルダに `alfred/Alfred.alfredpreferences` を指定
+3. Spotlight のホットキー(⌘Space)をOFFにし、Alfred のホットキーを ⌘Space に変更
+   - 参考: https://www.alfredapp.com/help/advanced/sync/
+
+### Rectangle
+- 起動 → `RectangleConfig.json` をインポート
+
+### 日本語入力 (Google 日本語入力 / ライブ変換)
+- システム設定 > キーボード > 入力ソース で追加。`ctrl + space` で切替
+
+### Karabiner-Elements
+- 起動すると `~/.config/karabiner/`（dotfilesからリンク）の設定が読まれる
+- 主な設定: Caps/Ctrl入れ替え、左右⌘単押しで英数/かな、Esc/Ctrl+[ で英数も送出（vim用）
+
+### Google Chrome
+- Googleアカウントでログイン → ブックマーク/拡張を同期
+- よく使う拡張:
+  - Google Search Keyboard Shortcuts（検索結果を j/k で移動）
+  - Copy Title and Url as Markdown Style
+  - GoFullPage（フルページスクショ）
+  - Proxy SwitchyOmega（プロキシ管理）
+  - Vimium（j/k は Google検索では除外）
+  - Grammarly / Block Site / daily.dev
+
+### クラウドストレージ
+- Box / Dropbox を入れて共有・バックアップ先をリンク
+
+---
+
+## メンテナンス
+
+現在のマシンの状態を Brewfile に書き戻すには:
+
+```sh
+cd ~/src/github.com/tomkenta/mac-setting
+brew bundle dump --force --file=Brewfile     # ※カテゴリのコメントは消えるので注意
+```
+
+差分だけ取り込みたい場合は `brew bundle dump` を別ファイルに出して手で反映する。
