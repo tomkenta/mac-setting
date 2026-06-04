@@ -25,7 +25,7 @@
       value: true
       state: present
 
-  - name: バッテリー残量設定 # TODO big sur では動かない
+  - name: バッテリー残量設定 # macOS 11以降は効かない。システム設定 > コントロールセンター > バッテリー > 割合(%)を表示 で手動ON
     osx_defaults:
       domain: com.apple.menuextra.battery
       key: ShowPercent

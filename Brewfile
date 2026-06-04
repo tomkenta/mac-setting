@@ -1,57 +1,130 @@
-tap "ankitpokhrel/jira-cli"
-tap "azure/functions"
+# Brewfile - Mac キッティング用パッケージ定義
+#
+# 使い方:  brew bundle    (このファイルのあるディレクトリで実行)
+# 現況の同期: brew bundle dump --force   で再生成できる
+#
+# 対象環境: macOS (Apple Silicon / arm64) / Homebrew @ /opt/homebrew
+
+# ---- taps ----
 tap "homebrew/bundle"
-brew "ansible"
-brew "anyenv"
-brew "awscli"
-brew "azure-cli"
-brew "bash"
+
+# =====================================================================
+# Homebrew formulae (CLI)
+# =====================================================================
+
+# --- shell / 環境管理 ---
+brew "fish"            # メインシェル
 brew "bash-completion"
-brew "colordiff"
-brew "dasel"
-brew "docker"
-brew "fish"
-brew "fzf"
-brew "ghq"
+brew "anyenv"          # nodenv 等のバージョン管理をまとめる
+
+# --- git まわり ---
 brew "git"
-brew "gnu-sed"
+brew "gh"              # GitHub CLI
 brew "hub"
-brew "hugo"
-brew "jq"
-brew "mas"
-brew "nkf"
-brew "openjdk"
-brew "peco"
-brew "ripgrep"
-brew "ruby"
-brew "telnet"
+brew "ghq"             # リポジトリを ~/src 配下に一元管理
 brew "tig"
+
+# --- CLI ユーティリティ ---
+brew "vim"
 brew "tmux"
 brew "tree"
-brew "vim"
 brew "wget"
+brew "jq"
+brew "fzf"
+brew "peco"
+brew "ripgrep"
+brew "colordiff"
+brew "gnu-sed"
+brew "nkf"
+brew "q"
+
+# --- 言語 / ランタイム ---
+brew "node"
 brew "yarn"
-brew "ankitpokhrel/jira-cli/jira-cli"
-brew "azure/functions/azure-functions-core-tools@3"
-cask "alfred"
-cask "appcleaner"
-cask "bartender"
-cask "box-notes"
-cask "cyberduck"
-cask "dash"
-cask "figma"
-cask "font-hackgen"
-cask "google-chrome"
-cask "karabiner-elements"
-cask "microsoft-remote-desktop"
-cask "notion"
-cask "notion-calendar"
-cask "openinterminal"
-cask "postman"
-cask "rectangle"
-cask "tabby"
-cask "the-unarchiver"
-cask "viber"
+brew "uv"              # Python パッケージ/環境マネージャ
+
+# --- クラウド / インフラ ---
+brew "ansible"
+brew "awscli"
+brew "cloudflared"
+brew "hugo"
+brew "mas"             # Mac App Store CLI
+
+# --- ビルド依存 (他ツールが要求。明示保持) ---
+brew "automake"
+brew "libtool"
+brew "libpng"
+brew "nasm"
+brew "pkgconf"
+brew "dpkg"
+
+# =====================================================================
+# Casks (GUI アプリ)  ※現況を全ミラー
+# =====================================================================
+
+# --- エディタ / 開発 / ターミナル ---
 cask "visual-studio-code"
-vscode "mushan.vscode-paste-image"
-vscode "whizkydee.material-palenight-theme"
+cask "cursor"
+cask "ghostty"
+cask "tabby"
+cask "docker-desktop"
+cask "postman"
+cask "sequel-pro"
+cask "charles"
+cask "cyberduck"
+cask "openinterminal"
+
+# --- AI ツール ---
+cask "claude"
+cask "codex"
+cask "codex-app"
+cask "cmux"
+cask "chatgpt-atlas"
+cask "superwhisper"
+
+# --- 生産性 / ユーティリティ ---
+cask "alfred"
+cask "rectangle"
+cask "karabiner-elements"
+cask "bartender"
+cask "appcleaner"
+cask "cleanshot"
+cask "textsniper"
+cask "the-unarchiver"
+cask "setapp"
+cask "toggl-track"
+
+# --- ノート / ドキュメント / デザイン ---
+cask "notion"
+cask "obsidian"
+cask "dynalist"
+cask "figma"
+cask "libreoffice"
+cask "plaud"
+
+# --- ブラウザ ---
+cask "google-chrome"
+cask "chromium"
+
+# --- コミュニケーション ---
+cask "slack"
+cask "viber"
+cask "zoom"
+
+# --- フォント ---
+cask "font-hackgen"
+
+# =====================================================================
+# VS Code 拡張
+# =====================================================================
+vscode "esbenp.prettier-vscode"
+vscode "mechatroner.rainbow-csv"
+vscode "octref.vetur"
+vscode "openai.chatgpt"
+vscode "silvenon.mdx"
+
+# =====================================================================
+# npm グローバル (任意。corepack 経由で yarn/pnpm を有効化)
+# =====================================================================
+npm "corepack"
+npm "gatsby-cli"
