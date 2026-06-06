@@ -16,8 +16,15 @@ brew bundle --file="$REPO_DIR/Brewfile" || true
 echo "==> [3/7] dotfiles"
 [ -d "$DOTFILES" ] || git clone https://github.com/tomkenta/dotfiles.git "$DOTFILES"
 
-for f in .zprofile .bash_profile .bashrc .vimrc .tmux.conf \
-          .gitconfig .gitattributes .gitignore_global; do
+for f in \
+  .zprofile \
+  .bash_profile \
+  .bashrc \
+  .vimrc \
+  .tmux.conf \
+  .gitconfig \
+  .gitattributes \
+  .gitignore_global; do
   ln -sf "$DOTFILES/$f" ~/"$f"
 done
 
