@@ -1,5 +1,7 @@
 #!/bin/bash
 # Mac キッティング自動化スクリプト (Apple Silicon)
+# shellcheck-test: intentional warning below - remove after CI check
+TEST_VAR="hello"
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
