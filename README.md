@@ -1,23 +1,20 @@
 # Mac 用の環境構築自動化設定ファイル
 ```
-curl -O -u tomkenta:{PAT} https://raw.githubusercontent.com/tomkenta/mac-setting/master/setting.sh
-chmod 755 ./setting.sh
-sh ./setting.sh 
+# YOUR_PAT は GitHub の Personal Access Token (repo スコープ)
+curl -fsSL -H "Authorization: token YOUR_PAT" \
+  https://raw.githubusercontent.com/tomkenta/mac-setting/master/setup.sh \
+  -o setup.sh
+chmod +x ./setup.sh
+./setup.sh
 ```
 
-`sh .setting` will take 30mins - 1 hours. Do somthing else
+`./setup.sh` will take 30mins - 1 hours. Do somthing else
 
 ex.
 1. System Preferrence > Keyboard > modifier key > swap caps and control
 2. System Preferrence > Accecitbilty > Keyboard > Trackpad option > ennable dragging > without drac lock  
 
 others,. do others related to your job
-
-comments -
-As for ansible, 
-once you see "chenged" for one , you can use it already.
-
-so you can start do setting on each apps.
 
 ## directory structure
 ```
@@ -134,7 +131,7 @@ https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcme
 https://chrome.google.com/webstore/detail/dailydev-news-for-busy-de/jlmpjdjjbgclbocgajdjefcidcncaied?hl=en
 
 ## scroll
-https://ryanhanson.dev/scroll  > open > system prefrence > sctuiry > accecibilty >  tick it 
+https://ryanhanson.dev/scroll  > open > system prefrence > sctuiry > accecibilty >  tick it 
 
 tap scroll on nav bar > scroll with one finger > hold 
 > lunch on login
@@ -142,5 +139,3 @@ tap scroll on nav bar > scroll with one finger > hold
 ## Clound Strage Link
 (BOX/DropBox) 
 box share ( can cask)
-
-
