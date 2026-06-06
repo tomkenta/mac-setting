@@ -1,103 +1,138 @@
-# mac-setting — Mac キッティング自動化
-
-新しい Mac を最短で普段の作業環境にするための自動構築設定。
-
-対象環境: **macOS (Apple Silicon / arm64)** / Homebrew は `/opt/homebrew`。
-
----
-
-## クイックスタート
-
-```sh
-# setup.sh を取得して実行
+# Mac 用の環境構築自動化設定ファイル
+```
 curl -fsSL -O https://raw.githubusercontent.com/tomkenta/mac-setting/master/setup.sh
 chmod +x ./setup.sh
 ./setup.sh
 ```
 
-> `brew bundle` のアプリ群インストールで 30分〜1時間ほどかかる。
-> その間に下記「GUIで手動設定する項目」を進めると効率的。
+`./setup.sh` will take 30mins - 1 hours. Do somthing else
 
-リポジトリは `~/src/github.com/tomkenta/mac-setting` に clone される。
+ex.
+1. System Preferrence > Keyboard > modifier key > swap caps and control
+2. System Preferrence > Accecitbilty > Keyboard > Trackpad option > ennable dragging > without drac lock  
 
-### setup.sh がやること
+others,. do others related to your job
 
-| ステップ | 内容 |
-|---------|------|
-| 1 | Homebrew インストール |
-| 2 | `brew bundle` — CLI / cask / VS Code 拡張を一括インストール |
-| 3 | dotfiles clone + symlink（`~/.gitconfig` 等） |
-| 4 | VS Code の settings.json / keybindings.json を配置 |
-| 5 | tmux プラグイン (tpm, battery, cpu, resurrect) を clone |
-| 6 | fisher (fish プラグインマネージャ) をダウンロード |
-| 7 | macOS defaults (キーリピート / Dock / トラックパッド等) を適用 |
-
-### 部分的に再実行したいとき
-
-```sh
-cd ~/src/github.com/tomkenta/mac-setting
-brew bundle                  # アプリだけ追加
-./setup.sh                   # 全体を再実行 (冪等)
+## directory structure
 ```
+└->$ tree -L 1
+.
+├── Applications (local applications)
+├── Box (need to install box-drive, this is where backup local files)
+├── Desktop (We don't use , don't wanna mess here)
+├── Documents 
+├── Downloads
+├── Library
+├── Movies
+├── Music
+├── Pictures
+├── Postman
+├── Public
+├── VirtualBox\ VMs
+├── code
+├── vbox
+└── work
 
+(DONT PUT files in home directory except dotfiles))
+```
+## System Preferene
+Basically it can be configured in automation script , but some of them still shoud be set in GUI
+
+- Touch ID
+register your fingerpirnt
+
+tick
+[] unlock your mac
+[] password auto fill
+
+
+## Alfred
+begin setup -> activate powerpack ( serach activation code there ) -> open alfred preference -> advanced -> Syncing -> set preference folder -> setting file "alfred/Alfred.alfredpreferences"
+
+turn off spotlight hotkey （spotligt -> turn off the shortcut)
+change hotkey to cmd + space
+
+see for backup and retrive settiing https://www.alfredapp.com/help/advanced/sync/
+
+
+
+## rectancgle (spectacle)
+open -> import the RectangleConfig.json
+
+## google japanese ime
+system preferrence >  keyboard > input source > + > google hiragana > OK 
+you can now change by ctrl + space
+
+## karabiner-element
+open is just ( .config/karabiner will work soon)
+
+--- outdated
+function key > use F1, F2 as function key
+simple 
+
+simple modification
+caps / ctrl swap
+
+complex > add rule > import more from network > serach japanese > import  For Japanese （日本語環境向けの設定） (rev 5)
+add
+- コマンドキーを単体で押したときに、英数・かなキーを送信する。（左コマンドキーは英数、右コマンドキーはかな） (rev 3)
+- escキーを押したときに、英数キーも送信する（vim用）
+- Ctrl+[を押したときに、escキーと英数キーを送信する
 ---
 
-## ディレクトリ構成
 
-```
-mac-setting/
-├── setup.sh             # ブートストラップスクリプト (全工程)
-├── Brewfile             # CLI / cask / VS Code 拡張の定義
-├── vscode/
-│   ├── settings.json
-│   └── keybindings.json
-├── RectangleConfig.json
-└── alfred/              # Alfred 設定 (同期フォルダとして指定)
-```
+once open ( swap ctrl / caps will be removed)
+      
+## google chrome 
+open -> google account login -> import bookmarks -> import extensions
 
-dotfiles 本体は別リポジトリ: `~/src/github.com/tomkenta/dotfiles`
+- import bookmarks 
 
----
+imort exported html from cloud strage ( job , personal)
+or 
+connected with google account ( personal) 
 
-## GUIで手動設定する項目
+### imort exported html from cloud strage ( job , personal)
+see https://support.google.com/chrome/answer/96816?hl=ja
 
-### システム設定
-- **Touch ID**: 指紋を登録（Mac のロック解除 / パスワード自動入力）
-- **キーボード > 修飾キー**: Caps Lock ⇄ Control を入れ替え
-- **トラックパッド > ドラッグ**: アクセシビリティ > ポインタ制御 > トラックパッドオプション
-- **コントロールセンター > バッテリー**: 「割合(%)を表示」をON（macOS 11以降は defaults で効かない）
+### connected with google account ( personal) 
+just login with your google account and turn on sync
 
-### Alfred (Powerpack)
-1. アクティベーションコードで有効化
-2. Preferences > Advanced > Syncing → `alfred/Alfred.alfredpreferences` を指定
-3. Spotlight のホットキー (⌘Space) をOFF → Alfred に割り当て
-   - 参考: https://www.alfredapp.com/help/advanced/sync/
+- import extension
 
-### Rectangle
-- 起動 → `RectangleConfig.json` をインポート
+now only I know this way so far, 
+- connected with google account ( personal) 
 
-### 日本語入力 (Google 日本語入力)
-- システム設定 > キーボード > 入力ソース で追加。`ctrl + space` で切替
+so just only to download them by hand.
+- Google Search Keyboard Shortcuts ★★★ ( jk navigation is really strong in google seach)
+  [Google Search Keyboard Shortcuts - Chrome Web Store](https://chromewebstore.google.com/detail/google-search-keyboard-sh/iobmefdldoplhmonnnkchglfdeepnfhd)
+- [Copy Title and Url as Markdown Style - Chrome ウェブストア](https://chromewebstore.google.com/detail/copy-title-and-url-as-mar/fpmbiocnfbjpajgeaicmnjnnokmkehil?hl=ja) ★★★ 
+- Full Page Screen Capture ★
+　https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl?hl=en
+- Katalon Recorder ★★★ (test tool w/ setting file)
+ https://chrome.google.com/webstore/detail/katalon-recorder-selenium/ljdobmomdgdljniojadhoplhkpialdid
+└ open file from cloud strage.
 
-### Karabiner-Elements
-- 起動すると `~/.config/karabiner/`（dotfiles からリンク）の設定が読まれる
-- 主な設定: Caps/Ctrl 入れ替え、左右⌘単押しで英数/かな、Esc で英数も送出（vim 用）
+- Proxy SwitchyOmega ★★★  (proxy manger w/ setting file)
+https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=en
+- Instant Data scraper ★ (it is easliy scrape file)
+ https://chrome.google.com/webstore/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah?hl=en
+- Vimunium ★ ( browsing in vim way)
+https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en
+└ exclude j,k in google search so j, k and /can be used by Web Serach Navigator
+- grammaly
+ https://chrome.google.com/webstore/detail/grammarly-for-chrome/kbfnbcaeplbcioakkpcpgfkobkghlhen?hl=en
+- website blocker
+ https://chrome.google.com/webstore/detail/block-site-website-blocke/eiimnmioipafcokbfikbljfdeojpcgbh
+- daily.dev
+https://chrome.google.com/webstore/detail/dailydev-news-for-busy-de/jlmpjdjjbgclbocgajdjefcidcncaied?hl=en
 
-### Google Chrome
-- Google アカウントでログイン → ブックマーク/拡張を同期
-- よく使う拡張: Google Search Keyboard Shortcuts / Copy Title and Url as Markdown Style /
-  GoFullPage / Proxy SwitchyOmega / Vimium / Grammarly / daily.dev
+## scroll
+https://ryanhanson.dev/scroll  > open > system prefrence > sctuiry > accecibilty >  tick it 
 
-### クラウドストレージ
-- Box / Dropbox でバックアップ先をリンク
+tap scroll on nav bar > scroll with one finger > hold 
+> lunch on login
 
----
-
-## メンテナンス
-
-現在のマシンの状態を Brewfile に書き戻すには:
-
-```sh
-cd ~/src/github.com/tomkenta/mac-setting
-brew bundle dump --force --file=Brewfile.new   # カテゴリコメントが消えるため別ファイルに出して比較
-```
+## Clound Strage Link
+(BOX/DropBox) 
+box share ( can cask)
