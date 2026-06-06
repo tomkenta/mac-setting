@@ -1,9 +1,0 @@
-# 現況の VS Code 拡張に同期。
-# 拡張のインストール自体は Brewfile の `vscode "..."` でも行われるため、
-# この role の主目的は settings.json / keybindings.json テンプレートの配置。
-vscode_extensions:
-  - esbenp.prettier-vscode
-  - mechatroner.rainbow-csv
-  - octref.vetur
-  - openai.chatgpt
-  - silvenon.mdx

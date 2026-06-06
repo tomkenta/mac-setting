@@ -2,6 +2,6 @@
     { "key": "cmd+shift+t", "command": "workbench.action.reopenClosedEditor", "when": "editorTextFocus" },
     { "key": "cmd+shift+k", "command": "workbench.action.terminal.focusNext" },
     { "key": "cmd+shift+j", "command": "workbench.action.terminal.focusPrevious" },
-    { "key": "cmd+shift+t", "command": "workbench.action.terminal.newInActiveWorkspace", "when":"terminalFocus" },
-    { "key": "cmd+shift+w", "command": "workbench.action.terminal.kill" },
+    { "key": "cmd+shift+t", "command": "workbench.action.terminal.newInActiveWorkspace", "when": "terminalFocus" },
+    { "key": "cmd+shift+w", "command": "workbench.action.terminal.kill" }
 ]
