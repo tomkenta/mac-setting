@@ -36,6 +36,11 @@ ln -sfn "$DOTFILES/.config/fish"      ~/.config/fish
 ln -sfn "$DOTFILES/.config/karabiner" ~/.config/karabiner
 ln -sfn "$DOTFILES/.config/ghostty"   ~/.config/ghostty
 
+# Claude Code の自作スクリプト（個別ファイルのみリンク。~/.claude はツール管理ディレクトリ）
+mkdir -p ~/.claude
+ln -sf "$DOTFILES/.claude/statusline.sh"         ~/.claude/statusline.sh
+ln -sf "$DOTFILES/.claude/statusline-command.sh" ~/.claude/statusline-command.sh
+
 echo "==> [4/7] VS Code 設定"
 VSCODE_USER=~/Library/Application\ Support/Code/User
 mkdir -p "$VSCODE_USER"
