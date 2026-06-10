@@ -18,6 +18,7 @@ echo "==> [3/7] dotfiles"
 
 for f in \
   .zprofile \
+  .zshrc \
   .bash_profile \
   .bashrc \
   .vimrc \
@@ -33,6 +34,7 @@ done
 mkdir -p ~/.config
 ln -sfn "$DOTFILES/.config/fish"      ~/.config/fish
 ln -sfn "$DOTFILES/.config/karabiner" ~/.config/karabiner
+ln -sfn "$DOTFILES/.config/ghostty"   ~/.config/ghostty
 
 echo "==> [4/7] VS Code 設定"
 VSCODE_USER=~/Library/Application\ Support/Code/User
@@ -67,4 +69,7 @@ killall Dock 2>/dev/null || true
 
 echo ""
 echo "セットアップ完了。"
-echo "次: Touch ID / Alfred Powerpack / Rectangle インポート / Google Chrome ログイン"
+echo "次の手動設定:"
+echo "  - git ユーザ設定: git config --global user.name \"<名前>\" && git config --global user.email \"<メール>\""
+echo "  - 秘密情報: ~/.zshrc.local を作成し export BUFFER_API_KEY=... 等を記載"
+echo "  - Touch ID / Alfred Powerpack / Rectangle インポート / Google Chrome ログイン"
