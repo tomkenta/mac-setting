@@ -11,8 +11,8 @@ chmod +x ./setup.sh
 `./setup.sh` will take 30mins - 1 hours. Do somthing else
 
 ex.
-1. System Preferrence > Keyboard > modifier key > swap caps and control
-2. System Preferrence > Accecitbilty > Keyboard > Trackpad option > ennable dragging > without drac lock  
+1. System Settings > Keyboard > modifier key > swap caps and control
+2. System Settings > Accessibility > Keyboard > Trackpad option > enable dragging > without drag lock  
 
 others,. do others related to your job
 
@@ -29,16 +29,13 @@ others,. do others related to your job
 ├── Movies
 ├── Music
 ├── Pictures
-├── Postman
 ├── Public
-├── VirtualBox\ VMs
 ├── code
-├── vbox
 └── work
 
 (DONT PUT files in home directory except dotfiles))
 ```
-## System Preferene
+## System Settings
 Basically it can be configured in automation script , but some of them still shoud be set in GUI
 
 - Touch ID
@@ -59,11 +56,11 @@ see for backup and retrive settiing https://www.alfredapp.com/help/advanced/sync
 
 
 
-## rectancgle (spectacle)
+## rectangle
 open -> import the RectangleConfig.json
 
 ## google japanese ime
-system preferrence >  keyboard > input source > + > google hiragana > OK 
+System Settings > Keyboard > input source > + > Google Hiragana > OK
 you can now change by ctrl + space
 
 ## karabiner-element
@@ -103,39 +100,28 @@ just login with your google account and turn on sync
 
 - import extension
 
-now only I know this way so far, 
-- connected with google account ( personal) 
+sign in with google account to restore extensions, or install manually:
 
-so just only to download them by hand.
-- Google Search Keyboard Shortcuts ★★★ ( jk navigation is really strong in google seach)
-  [Google Search Keyboard Shortcuts - Chrome Web Store](https://chromewebstore.google.com/detail/google-search-keyboard-sh/iobmefdldoplhmonnnkchglfdeepnfhd)
-- [Copy Title and Url as Markdown Style - Chrome ウェブストア](https://chromewebstore.google.com/detail/copy-title-and-url-as-mar/fpmbiocnfbjpajgeaicmnjnnokmkehil?hl=ja) ★★★ 
-- Full Page Screen Capture ★
-　https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl?hl=en
-- Katalon Recorder ★★★ (test tool w/ setting file)
- https://chrome.google.com/webstore/detail/katalon-recorder-selenium/ljdobmomdgdljniojadhoplhkpialdid
-└ open file from cloud strage.
-
-- Proxy SwitchyOmega ★★★  (proxy manger w/ setting file)
-https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=en
-- Instant Data scraper ★ (it is easliy scrape file)
- https://chrome.google.com/webstore/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah?hl=en
-- Vimunium ★ ( browsing in vim way)
-https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en
-└ exclude j,k in google search so j, k and /can be used by Web Serach Navigator
-- grammaly
- https://chrome.google.com/webstore/detail/grammarly-for-chrome/kbfnbcaeplbcioakkpcpgfkobkghlhen?hl=en
-- website blocker
- https://chrome.google.com/webstore/detail/block-site-website-blocke/eiimnmioipafcokbfikbljfdeojpcgbh
-- daily.dev
-https://chrome.google.com/webstore/detail/dailydev-news-for-busy-de/jlmpjdjjbgclbocgajdjefcidcncaied?hl=en
+- [BlockSite: Block Websites & Stay Focused](https://chromewebstore.google.com/detail/block-site-website-blocke/eiimnmioipafcokbfikbljfdeojpcgbh)
+- [Buffer](https://chromewebstore.google.com/detail/buffer/noojglkidnpfjbincgijbaiedldjfbhh)
+- [Claude](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn)
+- [Codex](https://chromewebstore.google.com/detail/codex/hehggadaopoacecdllhhajmbjkdcmajg)
+- [GoFullPage - Full Page Screen Capture](https://chromewebstore.google.com/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl)
+- [Google Docs Offline](https://chromewebstore.google.com/detail/google-docs-offline/ghbmnnjooekpmoecnnnilnnbdlolhkhi)
+- [Grammarly](https://chromewebstore.google.com/detail/grammarly-for-chrome/kbfnbcaeplbcioakkpcpgfkobkghlhen)
+- [LastPass: Free Password Manager](https://chromewebstore.google.com/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd)
+- [Notion Boost](https://chromewebstore.google.com/detail/notion-boost/eciepnnimnjaojlkcpdpcgbfkpcagahd)
+- [Save to Notion](https://chromewebstore.google.com/detail/save-to-notion/ldmmifpegigmeammaeckplhnjbbpccmm)
+- [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
 
 ## scroll
-https://ryanhanson.dev/scroll  > open > system prefrence > sctuiry > accecibilty >  tick it 
+https://ryanhanson.dev/scroll  > open > System Settings > Privacy & Security > Accessibility > tick it
 
 tap scroll on nav bar > scroll with one finger > hold 
 > lunch on login
 
-## Clound Strage Link
-(BOX/DropBox) 
+enter license key: Scroll menu bar icon > Enter License Key
+
+## Cloud Storage Link
+(BOX)
 box share ( can cask)
