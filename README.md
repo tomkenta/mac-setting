@@ -1,9 +1,6 @@
 # Mac 用の環境構築自動化設定ファイル
 ```
-# YOUR_PAT は GitHub の Personal Access Token (repo スコープ)
-curl -fsSL -H "Authorization: token YOUR_PAT" \
-  https://raw.githubusercontent.com/tomkenta/mac-setting/master/setup.sh \
-  -o setup.sh
+curl -fsSL https://raw.githubusercontent.com/tomkenta/mac-setting/master/setup.sh -o setup.sh
 chmod +x ./setup.sh
 ./setup.sh
 ```
@@ -15,6 +12,25 @@ ex.
 2. System Settings > Accessibility > Keyboard > Trackpad option > enable dragging > without drag lock  
 
 others,. do others related to your job
+
+## 構成と設計方針
+
+このリポジトリ (`mac-setting`) は **Mac キッティングのオーケストレーション**。
+個人の portable な設定は別リポジトリ **[dotfiles](https://github.com/tomkenta/dotfiles)** が持ち、
+`setup.sh` が symlink で配置する。
+
+- `mac-setting`: `setup.sh`（手順）/ `Brewfile`（アプリ・CLI）/ アプリ別設定（`vscode/` `alfred/` `RectangleConfig.json`）
+- `dotfiles`: `.gitconfig` / fish / karabiner / git hooks など。個人設定の単一の源。
+
+### セキュリティ設計（要点）
+- **編集・push は個人マシンから。会社PCは clone/pull（参照）のみ。**
+  会社環境でのコミットは identity（社用メール・社内ホスト名）の焼き付きや機密の巻き込みを招くため。
+- **identity をホスト名から自動生成させない** — dotfiles `.gitconfig` の `useConfigOnly = true`。
+  未設定のまま commit するとエラーになり、`名前@ホスト名` の混入を防ぐ。
+- **全 repo で gitleaks スキャン** — dotfiles の `core.hooksPath` → pre-commit / pre-push で実行。
+- **機密の "具体値" はどの repo にも置かない** — gitleaks の具体ルール（前職ドメイン等）は
+  `~/.gitleaks.toml`（`$HOME` 直下・非追跡）にのみ書き、追跡ファイル（`setup.sh` 等）には
+  汎用パターンのみ記載する。
 
 ## directory structure
 ```
