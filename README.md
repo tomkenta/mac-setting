@@ -1,9 +1,6 @@
 # Mac 用の環境構築自動化設定ファイル
 ```
-# YOUR_PAT は GitHub の Personal Access Token (repo スコープ)
-curl -fsSL -H "Authorization: token YOUR_PAT" \
-  https://raw.githubusercontent.com/tomkenta/mac-setting/master/setup.sh \
-  -o setup.sh
+curl -fsSL https://raw.githubusercontent.com/tomkenta/mac-setting/master/setup.sh -o setup.sh
 chmod +x ./setup.sh
 ./setup.sh
 ```
