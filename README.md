@@ -1,7 +1,7 @@
 # Mac 用の環境構築自動化設定ファイル
 ```
-curl -fsSL https://raw.githubusercontent.com/tomkenta/mac-setting/master/setup.sh -o setup.sh
-chmod +x ./setup.sh
+git clone https://github.com/tomkenta/mac-setting.git
+cd mac-setting
 ./setup.sh
 ```
 
