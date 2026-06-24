@@ -68,8 +68,8 @@ fi
 echo "==> [5/8] VS Code 設定"
 VSCODE_USER=~/Library/Application\ Support/Code/User
 mkdir -p "$VSCODE_USER"
-cp "$REPO_DIR/vscode/settings.json"    "$VSCODE_USER/settings.json"
-cp "$REPO_DIR/vscode/keybindings.json" "$VSCODE_USER/keybindings.json"
+ln -sf "$REPO_DIR/vscode/settings.json"    "$VSCODE_USER/settings.json"
+ln -sf "$REPO_DIR/vscode/keybindings.json" "$VSCODE_USER/keybindings.json"
 
 echo "==> [6/8] tmux プラグイン"
 TMUX_PLUGINS=~/.tmux/plugins
