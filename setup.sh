@@ -6,7 +6,7 @@ REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 DOTFILES=~/src/github.com/tomkenta/dotfiles
 
 echo "==> [1/8] Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo "==> [2/8] brew bundle (失敗したパッケージはスキップ)"
@@ -68,8 +68,8 @@ fi
 echo "==> [5/8] VS Code 設定"
 VSCODE_USER=~/Library/Application\ Support/Code/User
 mkdir -p "$VSCODE_USER"
-cp "$REPO_DIR/vscode/settings.json"    "$VSCODE_USER/settings.json"
-cp "$REPO_DIR/vscode/keybindings.json" "$VSCODE_USER/keybindings.json"
+ln -sf "$REPO_DIR/vscode/settings.json"    "$VSCODE_USER/settings.json"
+ln -sf "$REPO_DIR/vscode/keybindings.json" "$VSCODE_USER/keybindings.json"
 
 echo "==> [6/8] tmux プラグイン"
 TMUX_PLUGINS=~/.tmux/plugins
