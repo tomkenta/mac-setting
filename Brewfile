@@ -1,5 +1,4 @@
 brew "ansible"
-brew "mise"
 brew "awscli"
 brew "bash-completion"
 brew "bat"
