@@ -6,7 +6,7 @@ REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 DOTFILES=~/src/github.com/tomkenta/dotfiles
 
 echo "==> [1/8] Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo "==> [2/8] brew bundle (失敗したパッケージはスキップ)"

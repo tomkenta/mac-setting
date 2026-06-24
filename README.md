@@ -5,7 +5,7 @@ cd mac-setting
 ./setup.sh
 ```
 
-`./setup.sh` will take 30mins - 1 hours. Do somthing else
+`./setup.sh` will take 30mins - 1 hours. Do something else
 
 ex.
 1. System Settings > Keyboard > modifier key > swap caps and control
@@ -52,10 +52,10 @@ others,. do others related to your job
 (DONT PUT files in home directory except dotfiles))
 ```
 ## System Settings
-Basically it can be configured in automation script , but some of them still shoud be set in GUI
+Basically it can be configured in automation script , but some of them still should be set in GUI
 
 - Touch ID
-register your fingerpirnt
+register your fingerprint
 
 tick
 [] unlock your mac
@@ -63,12 +63,12 @@ tick
 
 
 ## Alfred
-begin setup -> activate powerpack ( serach activation code there ) -> open alfred preference -> advanced -> Syncing -> set preference folder -> setting file "alfred/Alfred.alfredpreferences"
+begin setup -> activate powerpack ( search activation code there ) -> open alfred preference -> advanced -> Syncing -> set preference folder -> setting file "alfred/Alfred.alfredpreferences"
 
-turn off spotlight hotkey （spotligt -> turn off the shortcut)
+turn off spotlight hotkey （spotlight -> turn off the shortcut)
 change hotkey to cmd + space
 
-see for backup and retrive settiing https://www.alfredapp.com/help/advanced/sync/
+see for backup and retrieve setting https://www.alfredapp.com/help/advanced/sync/
 
 
 
@@ -104,11 +104,11 @@ open -> google account login -> import bookmarks -> import extensions
 
 - import bookmarks 
 
-imort exported html from cloud strage ( job , personal)
+import exported html from cloud strage ( job , personal)
 or 
 connected with google account ( personal) 
 
-### imort exported html from cloud strage ( job , personal)
+### import exported html from cloud strage ( job , personal)
 see https://support.google.com/chrome/answer/96816?hl=ja
 
 ### connected with google account ( personal) 
@@ -134,7 +134,7 @@ sign in with google account to restore extensions, or install manually:
 https://ryanhanson.dev/scroll  > open > System Settings > Privacy & Security > Accessibility > tick it
 
 tap scroll on nav bar > scroll with one finger > hold 
-> lunch on login
+> launch on login
 
 enter license key: Scroll menu bar icon > Enter License Key
 
