@@ -94,6 +94,7 @@ defaults write com.apple.dock static-only              -bool true
 defaults write com.apple.dock wvous-br-corner          -int 5
 defaults write com.apple.dock wvous-br-modifier        -int 0
 defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
+defaults write -g com.apple.trackpad.scaling           10
 killall Dock 2>/dev/null || true
 
 echo ""
