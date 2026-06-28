@@ -93,8 +93,9 @@ defaults write com.apple.dock autohide                 -bool true
 defaults write com.apple.dock static-only              -bool true
 defaults write com.apple.dock wvous-br-corner          -int 5
 defaults write com.apple.dock wvous-br-modifier        -int 0
-defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
-defaults write -g com.apple.trackpad.scaling           10
+defaults write com.apple.AppleMultitouchTrackpad Clicking  -int 1
+defaults write com.apple.AppleMultitouchTrackpad Dragging  -bool true
+defaults write -g com.apple.trackpad.scaling               10
 killall Dock 2>/dev/null || true
 
 echo ""
@@ -106,3 +107,4 @@ echo "  - 前職/社内の固有ドメインを gitleaks で弾きたい場合: 
 echo "    （$HOME 直下・非追跡。repo には入れない）"
 echo "  - 秘密情報: ~/.zshrc.local を作成し export BUFFER_API_KEY=... 等を記載"
 echo "  - Touch ID / Alfred Powerpack / Rectangle インポート / Google Chrome ログイン"
+echo "  - Caps Lock → Control のリマップ: システム設定 > キーボード > キーボードショートカット > 修飾キー"
