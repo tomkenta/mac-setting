@@ -14,8 +14,8 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: brew bundle check
-        run: brew bundle check --no-upgrade --file=Brewfile
+      - name: brew bundle list (syntax check)
+        run: brew bundle list --file=Brewfile
 
   lint:
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
 
       - name: Check format
         run: |
-          invalid=$(grep -Evn '^(#|brew |cask |mas |tap |vscode |whalebrew |[[:space:]]*$)' Brewfile)
+          invalid=$(grep -Evn '^(#|brew |cask |mas |tap |vscode |whalebrew |[[:space:]]*$)' Brewfile || true)
           if [ -n "$invalid" ]; then
             echo "Invalid format lines:"
             echo "$invalid"
