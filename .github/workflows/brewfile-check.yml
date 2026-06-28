@@ -1,0 +1,16 @@
+name: Brewfile check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    paths:
+      - Brewfile
+
+jobs:
+  brew-bundle-check:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: brew bundle check
+        run: brew bundle check --no-upgrade --file=Brewfile
