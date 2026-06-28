@@ -1,8 +1,10 @@
-name: Brewfile check
+name: Brewfile Check
 
 on:
   push:
     branches: [master]
+    paths:
+      - Brewfile
   pull_request:
     paths:
       - Brewfile
@@ -14,3 +16,59 @@ jobs:
       - uses: actions/checkout@v4
       - name: brew bundle check
         run: brew bundle check --no-upgrade --file=Brewfile
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for duplicate entries
+        run: |
+          dups=$(grep -E '^(brew|cask|mas|tap|vscode|whalebrew) ' Brewfile | sort | uniq -d)
+          if [ -n "$dups" ]; then
+            echo "Duplicate entries found:"
+            echo "$dups"
+            exit 1
+          fi
+          echo "No duplicates found"
+
+      - name: Check format
+        run: |
+          invalid=$(grep -Evn '^(#|brew |cask |mas |tap |vscode |whalebrew |[[:space:]]*$)' Brewfile)
+          if [ -n "$invalid" ]; then
+            echo "Invalid format lines:"
+            echo "$invalid"
+            exit 1
+          fi
+          echo "Format OK"
+
+      - name: Check alphabetical order within sections
+        run: |
+          python3 - <<'EOF'
+          import sys
+
+          sections = {"brew": [], "cask": [], "vscode": [], "mas": [], "tap": []}
+          with open("Brewfile") as f:
+            for lineno, line in enumerate(f, 1):
+              line = line.rstrip()
+              for key in sections:
+                if line.startswith(f'{key} "'):
+                  name = line.split('"')[1]
+                  sections[key].append((lineno, name))
+                  break
+
+          ok = True
+          for key, entries in sections.items():
+            names = [e[1] for e in entries]
+            sorted_names = sorted(names)
+            if names != sorted_names:
+              print(f"Section '{key}' is not in alphabetical order:")
+              for i, ((lineno, name), expected) in enumerate(zip(entries, sorted_names)):
+                if name != expected:
+                  print(f"  Line {lineno}: '{name}' (expected '{expected}')")
+              ok = False
+
+          if not ok:
+            sys.exit(1)
+          print("Alphabetical order OK")
+          EOF
