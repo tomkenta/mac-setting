@@ -8,6 +8,8 @@ DOTFILES=~/src/github.com/tomkenta/dotfiles
 echo "==> [1/8] Homebrew"
 command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
+# zsh compinit がグループ書き込み可能ディレクトリを警告するため除去
+chmod g-w /opt/homebrew/share 2>/dev/null || true
 
 echo "==> [2/8] brew bundle (失敗したパッケージはスキップ)"
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
