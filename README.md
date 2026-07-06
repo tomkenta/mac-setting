@@ -118,6 +118,7 @@ just login with your google account and turn on sync
 
 sign in with google account to restore extensions, or install manually:
 
+- [ActivityWatch Web Watcher](https://chromewebstore.google.com/detail/activitywatch-web-watcher/nglaklhklhcoonedhgnpgddginnjdadi)
 - [BlockSite: Block Websites & Stay Focused](https://chromewebstore.google.com/detail/block-site-website-blocke/eiimnmioipafcokbfikbljfdeojpcgbh)
 - [Buffer](https://chromewebstore.google.com/detail/buffer/noojglkidnpfjbincgijbaiedldjfbhh)
 - [Claude](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn)
@@ -131,6 +132,13 @@ sign in with google account to restore extensions, or install manually:
 - [Save to Notion](https://chromewebstore.google.com/detail/save-to-notion/ldmmifpegigmeammaeckplhnjbbpccmm)
 - [TabCopy](https://chromewebstore.google.com/detail/tabcopy/micdllihgoppmejpecmkilggmaagfdmb)
 - [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
+
+## ActivityWatch
+ActivityWatch はアプリ使用時間・Web 閲覧を自動で記録するローカルタイムトラッカー。
+`brew install --cask activitywatch` でインストール済み（Brewfile 管理）。
+
+Chrome での Web 閲覧を記録するには上の **ActivityWatch Web Watcher** 拡張をインストールし、
+ActivityWatch アプリを起動した状態で使用する。
 
 ## scroll
 https://ryanhanson.dev/scroll  > open > System Settings > Privacy & Security > Accessibility > tick it
