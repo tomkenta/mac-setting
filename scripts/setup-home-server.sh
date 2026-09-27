@@ -9,6 +9,7 @@ fi
 
 TARGET_USER="${SUDO_USER:-$USER}"
 FIREWALL="/usr/libexec/ApplicationFirewall/socketfilterfw"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 if ! id "$TARGET_USER" >/dev/null 2>&1; then
   echo "設定対象ユーザが見つかりません: $TARGET_USER" >&2
@@ -40,6 +41,9 @@ sudo "$FIREWALL" --setallowsigned on
 sudo "$FIREWALL" --setallowsignedapp on
 sudo "$FIREWALL" --setstealthmode on
 
+echo "==> 外出先アクセス用のTailscaleを準備"
+"$SCRIPT_DIR/setup-tailscale.sh"
+
 echo
 echo "==> 設定結果"
 sudo systemsetup -getremotelogin
@@ -52,4 +56,4 @@ pmset -g custom
 echo
 echo "ホームサーバーの基本設定が完了しました。"
 echo "SSH許可ユーザ: $TARGET_USER"
-echo "残りの手動設定は docs/home-server.md を確認してください。"
+echo "Tailscaleの初回認証を完了し、残りの手動設定は docs/home-server.md を確認してください。"

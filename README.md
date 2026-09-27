@@ -15,7 +15,7 @@ Mac miniを家庭内LAN向けのヘッドレスサーバとして設定する場
 ./scripts/setup-home-server.sh
 ```
 
-SSH、スリープ防止、停電後の自動起動、ファイアウォールを設定する。画面共有やネットワーク、バックアップを含む手順は[Mac mini ホームサーバー設定](docs/home-server.md)を参照。
+SSH、スリープ防止、停電後の自動起動、ファイアウォール、外出先アクセス用Tailscaleを設定する。画面共有やネットワーク、バックアップを含む手順は[Mac mini ホームサーバー設定](docs/home-server.md)を参照。
 
 ex.
 1. System Settings > Keyboard > modifier key > swap caps and control
