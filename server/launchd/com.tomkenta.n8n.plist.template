@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.tomkenta.n8n</string>
+
+  <key>UserName</key>
+  <string>__USER__</string>
+  <key>GroupName</key>
+  <string>__GROUP__</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__BREW_PREFIX__/bin/n8n</string>
+    <string>start</string>
+  </array>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>PATH</key>
+    <string>__BREW_PREFIX__/opt/node@22/bin:__BREW_PREFIX__/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>GENERIC_TIMEZONE</key>
+    <string>Asia/Tokyo</string>
+    <key>TZ</key>
+    <string>Asia/Tokyo</string>
+    <key>N8N_HOST</key>
+    <string>localhost</string>
+    <key>N8N_LISTEN_ADDRESS</key>
+    <string>127.0.0.1</string>
+    <key>N8N_PORT</key>
+    <string>5678</string>
+    <key>N8N_PROTOCOL</key>
+    <string>http</string>
+    <key>N8N_USER_FOLDER</key>
+    <string>__N8N_DATA_DIR__</string>
+    <key>N8N_ENCRYPTION_KEY</key>
+    <string>__N8N_ENCRYPTION_KEY__</string>
+    <key>N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS</key>
+    <string>true</string>
+    <key>N8N_DIAGNOSTICS_ENABLED</key>
+    <string>false</string>
+    <key>N8N_PERSONALIZATION_ENABLED</key>
+    <string>false</string>
+  </dict>
+
+  <key>WorkingDirectory</key>
+  <string>__N8N_DATA_DIR__</string>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+  <key>StandardOutPath</key>
+  <string>__LOG_DIR__/n8n.log</string>
+  <key>StandardErrorPath</key>
+  <string>__LOG_DIR__/n8n.error.log</string>
+</dict>
+</plist>

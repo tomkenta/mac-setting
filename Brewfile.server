@@ -1,0 +1,5 @@
+# Mac mini server: only runtimes required by setup-server.sh.
+# User-facing applications and convenience CLIs belong in the client Brewfile.
+
+brew "node@22"
+brew "uv"

@@ -1,4 +1,54 @@
 # Mac 用の環境構築自動化設定ファイル
+
+このリポジトリは、用途ごとに2つのセットアップを提供する。
+
+- `setup.sh`: 普段使いのクライアントMac
+- `setup-server.sh`: 24時間稼働するMac miniサーバー
+
+## Mac miniサーバー
+
+```sh
+git clone https://github.com/tomkenta/mac-setting.git
+cd mac-setting
+./setup-server.sh
+```
+
+サーバー用セットアップは、クライアント用の`Brewfile`を参照しない。専用の
+`Brewfile.server`だけを使い、次を構成する。
+
+- SSH（リモートログイン）と画面共有
+- macOSファイアウォールとサーバー向け電源設定
+- Tailscale
+- n8n（ユーザー権限のLaunchDaemonとして常時起動）
+- Claude CodeとCodex CLI
+- Python 3.12環境、uv、LangGraph
+
+n8nはインターネットやLANへ直接公開せず、`127.0.0.1:5678`だけで待ち受ける。
+外出先からはTailscale経由のSSHトンネルを使う。
+
+```sh
+ssh -L 5678:127.0.0.1:5678 <user>@<tailscale-hostname>
+```
+
+接続中に手元のブラウザで <http://127.0.0.1:5678> を開く。セットアップ後の確認は
+次で行う。
+
+```sh
+./server/healthcheck.sh
+```
+
+画面共有は、Tailscale接続後にFinderの「移動 > サーバへ接続」から
+`vnc://<tailscale-hostname>`を開く。LangGraph用Python環境は次で有効化する。
+
+```sh
+source "$HOME/.local/share/kenta-os/python/bin/activate"
+```
+
+Tailscale、Claude Code、Codexは初回のみ対話的なログインが必要。FileVaultが有効な
+Macは、停電からの再起動後にローカルでのロック解除が必要になる場合がある。
+
+## クライアントMac
+
 ```
 git clone https://github.com/tomkenta/mac-setting.git
 cd mac-setting
