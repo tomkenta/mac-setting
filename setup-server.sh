@@ -9,6 +9,7 @@ N8N_DATA_DIR="$HOME/Library/Application Support/KentaOS/n8n"
 LOG_DIR="$HOME/Library/Logs/KentaOS"
 PYTHON_ENV="$HOME/.local/share/kenta-os/python"
 LAUNCH_DAEMON="/Library/LaunchDaemons/com.tomkenta.n8n.plist"
+TARGET_USER="$(id -un)"
 
 if [ "$(uname -s)" != "Darwin" ]; then
   echo "This script supports macOS only." >&2
@@ -29,10 +30,21 @@ sudo -v
 
 echo "==> [2/8] macOS server settings"
 sudo /usr/sbin/systemsetup -setremotelogin on
+
+if ! /usr/bin/dscl . -read /Groups/com.apple.access_ssh >/dev/null 2>&1; then
+  sudo /usr/sbin/dseditgroup -o create com.apple.access_ssh
+fi
+sudo /usr/sbin/dseditgroup -o edit -a "$TARGET_USER" -t user com.apple.access_ssh
+
 sudo /bin/launchctl enable system/com.apple.screensharing
 sudo /bin/launchctl kickstart -k system/com.apple.screensharing
+if ! /usr/bin/dscl . -read /Groups/com.apple.access_screensharing >/dev/null 2>&1; then
+  sudo /usr/sbin/dseditgroup -o create com.apple.access_screensharing
+fi
+sudo /usr/sbin/dseditgroup -o edit -a "$TARGET_USER" -t user com.apple.access_screensharing
 
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall off
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned on
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp on
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
@@ -73,7 +85,7 @@ if [[ "$(node --version)" != v22.* ]]; then
 fi
 
 if [ ! -d /Applications/Tailscale.app ]; then
-  brew install --cask tailscale
+  brew install --cask tailscale-app
 else
   echo "Tailscale.app already exists; skipping installation."
 fi
