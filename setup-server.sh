@@ -74,26 +74,36 @@ if ! grep -Fqx "$BREW_SHELLENV" "$HOME/.zprofile"; then
   printf '\n%s\n' "$BREW_SHELLENV" >> "$HOME/.zprofile"
 fi
 
-echo "==> [4/8] Minimal server packages"
-brew bundle --file="$SERVER_BREWFILE"
-brew link --overwrite --force node@22 >/dev/null 2>&1 || true
-export PATH="$BREW_PREFIX/opt/node@22/bin:$BREW_PREFIX/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+echo "==> [4/8] Server packages from Brewfile.server"
+# Set PATH before Bundle so its npm entries use Node 24, including on first setup.
+# Keep global npm binaries at the path used by the n8n LaunchDaemon.
+export PATH="$BREW_PREFIX/opt/node@24/bin:$BREW_PREFIX/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export NPM_CONFIG_PREFIX="$BREW_PREFIX"
+HOMEBREW_PATH="$PATH" brew bundle --file="$SERVER_BREWFILE"
 
-if [[ "$(node --version)" != v22.* ]]; then
-  echo "Expected Node.js 22, but found $(node --version)." >&2
+if [[ "$(node --version)" != v24.* ]]; then
+  echo "Expected Node.js 24, but found $(node --version)." >&2
   exit 1
 fi
 
-if [ ! -d /Applications/Tailscale.app ]; then
-  brew install --cask tailscale-app
-else
-  echo "Tailscale.app already exists; skipping installation."
+echo "==> [5/8] n8n runtime preparation"
+# Bundle installs npm packages with --ignore-scripts. Prepare native dependencies
+# only inside n8n, without rebuilding or modifying unrelated global packages.
+N8N_PACKAGE_DIR="$(npm root --global)/n8n"
+if [ ! -d "$N8N_PACKAGE_DIR" ]; then
+  echo "n8n was not installed at $N8N_PACKAGE_DIR." >&2
+  exit 1
 fi
+(
+  cd "$N8N_PACKAGE_DIR"
+  npm rebuild --global=false --ignore-scripts=false
+)
+n8n --version
 
-echo "==> [5/8] AI command-line tools and n8n"
-for package_name in n8n @anthropic-ai/claude-code @openai/codex; do
-  if ! npm list --global --depth=0 "$package_name" >/dev/null 2>&1; then
-    npm install --global "$package_name"
+for command_name in claude codex; do
+  if ! command -v "$command_name" >/dev/null 2>&1; then
+    echo "$command_name is not on PATH after Brewfile.server installation." >&2
+    exit 1
   fi
 done
 

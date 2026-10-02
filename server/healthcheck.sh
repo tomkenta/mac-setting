@@ -4,9 +4,9 @@ set -uo pipefail
 failures=0
 
 if [ -x /opt/homebrew/bin/brew ]; then
-  export PATH="/opt/homebrew/opt/node@22/bin:/opt/homebrew/bin:$PATH"
+  export PATH="/opt/homebrew/opt/node@24/bin:/opt/homebrew/bin:$PATH"
 elif [ -x /usr/local/bin/brew ]; then
-  export PATH="/usr/local/opt/node@22/bin:/usr/local/bin:$PATH"
+  export PATH="/usr/local/opt/node@24/bin:/usr/local/bin:$PATH"
 fi
 
 ok() {
@@ -55,6 +55,12 @@ for command_name in brew uv node npm n8n claude codex; do
     warn "$command_name is not on PATH"
   fi
 done
+
+if command -v node >/dev/null 2>&1 && [[ "$(node --version)" == v24.* ]]; then
+  ok "Node.js 24 is active"
+else
+  warn "Node.js 24 is not active"
+fi
 
 PYTHON_ENV="$HOME/.local/share/kenta-os/python"
 if [ -x "$PYTHON_ENV/bin/python" ] && "$PYTHON_ENV/bin/python" -c 'import langgraph' >/dev/null 2>&1; then

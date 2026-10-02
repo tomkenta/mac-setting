@@ -24,11 +24,25 @@ cd mac-setting
 - 署名済みソフトウェアの受信接続を自動許可
 - ステルスモードを有効化
 - Tailscale Standalone版をインストールして初回認証を開始
-- Node.js 22、n8n、Claude Code、Codex CLIをインストール
+- Node.js 24、n8n、Claude Code、Codex CLIをインストール
 - Python 3.12、uv、LangGraphをインストール
 - n8nをユーザー権限のLaunchDaemonとして常時起動
 
-何度実行しても同じ設定になる。
+インストール対象は`Brewfile.server`に集約する。Homebrewのformula/caskに加えて、
+n8nも`npm "n8n"`として管理する。スクリプト内に別のインストール一覧は持たない。
+Homebrew Bundleはnpmのインストールスクリプトを省略するため、セットアップでは
+n8nのパッケージ内だけでネイティブ依存を再構築してから起動を確認する。
+Python依存は`server/requirements.txt`で管理する。
+
+再実行すると同じ設定を適用する。Brewfileの既存パッケージはHomebrew Bundleの
+更新方針に従うため、バージョンを固定した環境の再現を保証するものではない。
+
+インストールやOS設定を実行せず、依存一覧・処理順・エラー時の停止を検証するには
+次を実行する。
+
+```sh
+ruby server/tests/package_setup_test.rb
+```
 
 ## 2. 画面共有
 

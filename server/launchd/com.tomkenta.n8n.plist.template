@@ -21,7 +21,7 @@
     <key>HOME</key>
     <string>__HOME__</string>
     <key>PATH</key>
-    <string>__BREW_PREFIX__/opt/node@22/bin:__BREW_PREFIX__/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <string>__BREW_PREFIX__/opt/node@24/bin:__BREW_PREFIX__/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     <key>GENERIC_TIMEZONE</key>
     <string>Asia/Tokyo</string>
     <key>TZ</key>

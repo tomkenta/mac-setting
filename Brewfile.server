@@ -1,5 +1,13 @@
-# Mac mini server: only runtimes required by setup-server.sh.
-# User-facing applications and convenience CLIs belong in the client Brewfile.
+# Mac mini server: the single software installation list for setup-server.sh.
+# Client-only applications and convenience CLIs belong in the client Brewfile.
 
-brew "node@22"
+brew "node@24"
 brew "uv"
+
+cask "tailscale-app"
+cask "claude-code"
+cask "codex"
+
+# Homebrew Bundle supports npm packages as well as formulae and casks.
+# setup-server.sh prepares n8n's native dependencies after Bundle installs it.
+npm "n8n"

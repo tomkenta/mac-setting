@@ -23,6 +23,16 @@ cd mac-setting
 - Claude CodeとCodex CLI
 - Python 3.12環境、uv、LangGraph
 
+インストール対象の変更は`Brewfile.server`にまとめる。
+
+- `Brewfile.server`: Node.js 24・uv（brew）、Tailscale・Claude Code・Codex CLI（cask）、n8n（npm）
+- `setup-server.sh`: OS設定、n8nのネイティブ依存の準備と常駐設定、Python環境の作成
+- `server/requirements.txt`: LangGraphなどのPython依存
+
+`./setup-server.sh`がインストールから設定まで一括実行するため、別途`npm install`を
+実行する必要はない。Node.jsは他のバージョンを強制的にリンクし直さず、サーバーの
+セットアップとn8n起動時だけNode.js 24を優先する。
+
 n8nはインターネットやLANへ直接公開せず、`127.0.0.1:5678`だけで待ち受ける。
 外出先からはTailscale経由のSSHトンネルを使う。
 
