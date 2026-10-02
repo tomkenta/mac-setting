@@ -75,11 +75,12 @@ if ! grep -Fqx "$BREW_SHELLENV" "$HOME/.zprofile"; then
 fi
 
 echo "==> [4/8] Server packages from Brewfile.server"
-# Set PATH before Bundle so its npm entries use Node 24, including on first setup.
+# Use Node 24 for this script. Brewfile.server also restores these variables
+# inside Homebrew, which filters the caller's environment before running npm.
 # Keep global npm binaries at the path used by the n8n LaunchDaemon.
 export PATH="$BREW_PREFIX/opt/node@24/bin:$BREW_PREFIX/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export NPM_CONFIG_PREFIX="$BREW_PREFIX"
-HOMEBREW_PATH="$PATH" brew bundle --file="$SERVER_BREWFILE"
+brew bundle --file="$SERVER_BREWFILE"
 
 if [[ "$(node --version)" != v24.* ]]; then
   echo "Expected Node.js 24, but found $(node --version)." >&2

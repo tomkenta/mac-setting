@@ -1,6 +1,12 @@
 # Mac mini server: the single software installation list for setup-server.sh.
 # Client-only applications and convenience CLIs belong in the client Brewfile.
 
+# Homebrew filters the caller's PATH and npm config before evaluating this file.
+# Restore the versioned runtime here too, so Bundle's npm subprocess can find it.
+server_prefix = ENV.fetch("HOMEBREW_PREFIX")
+ENV["PATH"] = "#{server_prefix}/opt/node@24/bin:#{server_prefix}/bin:#{ENV.fetch('PATH')}"
+ENV["NPM_CONFIG_PREFIX"] = server_prefix
+
 brew "node@24"
 brew "uv"
 

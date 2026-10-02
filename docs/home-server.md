@@ -30,6 +30,8 @@ cd mac-setting
 
 インストール対象は`Brewfile.server`に集約する。Homebrewのformula/caskに加えて、
 n8nも`npm "n8n"`として管理する。スクリプト内に別のインストール一覧は持たない。
+Homebrewは呼び出し元の環境変数をフィルタするため、`Brewfile.server`内でも
+Node.js 24のPATHとnpmのインストール先を設定する。
 Homebrew Bundleはnpmのインストールスクリプトを省略するため、セットアップでは
 n8nのパッケージ内だけでネイティブ依存を再構築してから起動を確認する。
 Python依存は`server/requirements.txt`で管理する。
@@ -42,6 +44,7 @@ Python依存は`server/requirements.txt`で管理する。
 
 ```sh
 ruby server/tests/package_setup_test.rb
+HOMEBREW_DEVELOPER=0 brew ruby server/tests/homebrew_npm_path_test.rb
 ```
 
 ## 2. 画面共有

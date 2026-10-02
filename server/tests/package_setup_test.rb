@@ -27,7 +27,15 @@ class ServerPackageSetupTest < Minitest::Test
 
   def test_all_server_software_is_declared_in_one_brewfile
     recorder = BrewfileRecorder.new
-    recorder.instance_eval(File.read(File.join(REPO_DIR, "Brewfile.server")))
+    original_environment = ENV.to_h
+    begin
+      ENV["HOMEBREW_PREFIX"] = "/test-homebrew"
+      recorder.instance_eval(File.read(File.join(REPO_DIR, "Brewfile.server")))
+      assert ENV["PATH"].start_with?("/test-homebrew/opt/node@24/bin:")
+      assert_equal "/test-homebrew", ENV["NPM_CONFIG_PREFIX"]
+    ensure
+      ENV.replace(original_environment)
+    end
     assert_equal [[:brew, "node@24"], [:brew, "uv"],
                   [:cask, "tailscale-app"], [:cask, "claude-code"],
                   [:cask, "codex"], [:npm, "n8n"]], recorder.entries
@@ -39,7 +47,7 @@ class ServerPackageSetupTest < Minitest::Test
     output, status = run_package_setup
     assert status.success?, output
     assert_match(/BUNDLE bundle --file=.*Brewfile\.server/, output)
-    assert_includes output, "BUNDLE_ENV node_path=true global_prefix=true original_path=true"
+    assert_includes output, "BUNDLE_ENV node_path=true global_prefix=true"
     assert_includes output, "REBUILD scoped=true rebuild --global=false --ignore-scripts=false"
     assert_includes output, "N8N --version"
     assert_operator output.index("BUNDLE bundle"), :<, output.index("REBUILD scoped")
@@ -97,8 +105,7 @@ class ServerPackageSetupTest < Minitest::Test
           printf 'BUNDLE %s\n' "$*"
           [[ "$PATH" == "$BREW_PREFIX/opt/node@24/bin:"* ]]
           [[ "$NPM_CONFIG_PREFIX" == "$BREW_PREFIX" ]]
-          [[ "$HOMEBREW_PATH" == "$PATH" ]]
-          printf 'BUNDLE_ENV node_path=true global_prefix=true original_path=true\n'
+          printf 'BUNDLE_ENV node_path=true global_prefix=true\n'
         }
         node() { printf '%s\n' "$TEST_NODE_VERSION"; }
         npm() {
