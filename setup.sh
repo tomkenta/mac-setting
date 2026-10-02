@@ -109,4 +109,5 @@ echo "  - 前職/社内の固有ドメインを gitleaks で弾きたい場合: 
 echo "    （$HOME 直下・非追跡。repo には入れない）"
 echo "  - 秘密情報: ~/.zshrc.local を作成し export BUFFER_API_KEY=... 等を記載"
 echo "  - Touch ID / Alfred Powerpack / Rectangle インポート / Google Chrome ログイン"
+echo "  - Tailscale: Mac miniと同じ個人アカウントでログインし、VPN構成・システム拡張を許可"
 echo "  - Caps Lock → Control のリマップ: システム設定 > キーボード > キーボードショートカット > 修飾キー"

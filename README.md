@@ -70,6 +70,11 @@ cd mac-setting
 
 `./setup.sh` will take 30mins - 1 hours. Do something else
 
+クライアント用`Brewfile`にもTailscale Standalone版（`tailscale-app`）を含める。
+インストール後にTailscaleを開き、Mac miniと同じログイン方法・同じ個人アカウントで
+ログインする。VPN構成・システム拡張の許可は初回のみGUIで行う。
+Tailscaleのアカウント情報や認証キーは、このリポジトリには保存しない。
+
 ex.
 1. System Settings > Keyboard > modifier key > swap caps and control
 2. System Settings > Accessibility > Keyboard > Trackpad option > enable dragging > without drag lock  
