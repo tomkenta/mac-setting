@@ -21,12 +21,13 @@ cd mac-setting
 - Tailscale
 - n8n（ユーザー権限のLaunchDaemonとして常時起動）
 - Claude CodeとCodex CLI
+- Claude・ChatGPTのデスクトップアプリ（Codexとスマホからのリモート操作用）
 - Python 3.12環境、uv、LangGraph
 - Google Chrome（n8nの初回設定・管理画面用）
 
 インストール対象の変更は`Brewfile.server`にまとめる。
 
-- `Brewfile.server`: Node.js 24・uv（brew）、Tailscale・Claude Code・Codex CLI・Google Chrome（cask）、n8n（npm）
+- `Brewfile.server`: Node.js 24・uv（brew）、Tailscale・Claude Code・Codex CLI・Claudeアプリ・ChatGPTアプリ（Codexを含む）・Google Chrome（cask）、n8n（npm）
 - `setup-server.sh`: OS設定、n8nのネイティブ依存の準備と常駐設定、Python環境の作成
 - `server/requirements.txt`: LangGraphなどのPython依存
 
@@ -60,7 +61,13 @@ source "$HOME/.local/share/kenta-os/python/bin/activate"
 Tailscale、Claude Code、Codexは初回のみ対話的なログインが必要。FileVaultが有効な
 Macは、停電からの再起動後にローカルでのロック解除が必要になる場合がある。
 
-ログイン後は、[n8nからClaudeを単発実行する動作テスト](docs/ai-smoke-test.md)へ進む。
+デスクトップ版は `claude` / `chatgpt`、CLI版は `claude-code` / `codex` という
+別のcaskで管理する。Codexデスクトップ機能はChatGPTアプリに統合されており、
+旧 `codex-app` caskは廃止予定のため新規導入しない。
+Mac miniの画面共有からアプリを開き、初回ログインと
+スマホへのリモート接続設定を行う。インストールだけではリモート操作は有効にならない。
+
+必要になったら、[n8nからClaudeを単発実行する動作テスト](docs/ai-smoke-test.md)を使える。
 手動トリガーのテンプレートと、結果をローカル保存する固定スクリプトを提供する。
 定期実行・外部サービス操作は、このテストでは有効にしない。
 

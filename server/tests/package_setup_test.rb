@@ -38,7 +38,8 @@ class ServerPackageSetupTest < Minitest::Test
     end
     assert_equal [[:brew, "node@24"], [:brew, "uv"],
                   [:cask, "tailscale-app"], [:cask, "claude-code"],
-                  [:cask, "codex"], [:cask, "google-chrome"], [:npm, "n8n"]], recorder.entries
+                  [:cask, "codex"], [:cask, "claude"], [:cask, "chatgpt"],
+                  [:cask, "google-chrome"], [:npm, "n8n"]], recorder.entries
     refute_match(/\bnpm install\b|\bbrew install\b|\bbrew link\b/, PACKAGE_SETUP)
     refute_includes SETUP, 'node@22'
   end
