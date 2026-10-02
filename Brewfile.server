@@ -13,6 +13,8 @@ brew "uv"
 cask "tailscale-app"
 cask "claude-code"
 cask "codex"
+# n8n's local HTTP setup uses Chrome at localhost with secure cookies enabled.
+cask "google-chrome"
 
 # Homebrew Bundle supports npm packages as well as formulae and casks.
 # setup-server.sh prepares n8n's native dependencies after Bundle installs it.

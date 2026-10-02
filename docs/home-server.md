@@ -25,6 +25,7 @@ cd mac-setting
 - ステルスモードを有効化
 - Tailscale Standalone版をインストールして初回認証を開始
 - Node.js 24、n8n、Claude Code、Codex CLIをインストール
+- Google Chromeをインストール（n8nの初回設定・管理画面用）
 - Python 3.12、uv、LangGraphをインストール
 - n8nをユーザー権限のLaunchDaemonとして常時起動
 
@@ -35,6 +36,11 @@ Node.js 24のPATHとnpmのインストール先を設定する。
 Homebrew Bundleはnpmのインストールスクリプトを省略するため、セットアップでは
 n8nのパッケージ内だけでネイティブ依存を再構築してから起動を確認する。
 Python依存は`server/requirements.txt`で管理する。
+
+n8nの初回設定はMac mini側のChromeで`http://localhost:5678`を開いて行う。
+外出先からSSHトンネルで利用するときも、手元のChromeで同じURLを開く。
+ローカルHTTPではSafariと`127.0.0.1`の組み合わせを使わず、Secure Cookieは
+有効のままにする。
 
 再実行すると同じ設定を適用する。Brewfileの既存パッケージはHomebrew Bundleの
 更新方針に従うため、バージョンを固定した環境の再現を保証するものではない。

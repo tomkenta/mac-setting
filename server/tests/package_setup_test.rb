@@ -38,7 +38,7 @@ class ServerPackageSetupTest < Minitest::Test
     end
     assert_equal [[:brew, "node@24"], [:brew, "uv"],
                   [:cask, "tailscale-app"], [:cask, "claude-code"],
-                  [:cask, "codex"], [:npm, "n8n"]], recorder.entries
+                  [:cask, "codex"], [:cask, "google-chrome"], [:npm, "n8n"]], recorder.entries
     refute_match(/\bnpm install\b|\bbrew install\b|\bbrew link\b/, PACKAGE_SETUP)
     refute_includes SETUP, 'node@22'
   end
@@ -85,6 +85,11 @@ class ServerPackageSetupTest < Minitest::Test
     healthcheck = File.read(File.join(REPO_DIR, "server/healthcheck.sh"))
     assert_includes healthcheck, "/opt/homebrew/opt/node@24/bin:"
     assert_includes healthcheck, "/usr/local/opt/node@24/bin:"
+  end
+
+  def test_n8n_browser_instructions_use_chrome_and_localhost
+    assert_includes SETUP, 'open -a \\"Google Chrome\\" http://localhost:5678'
+    refute_includes SETUP, 'Then visit http://127.0.0.1:5678'
   end
 
   private

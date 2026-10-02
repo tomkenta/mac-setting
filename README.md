@@ -22,10 +22,11 @@ cd mac-setting
 - n8n（ユーザー権限のLaunchDaemonとして常時起動）
 - Claude CodeとCodex CLI
 - Python 3.12環境、uv、LangGraph
+- Google Chrome（n8nの初回設定・管理画面用）
 
 インストール対象の変更は`Brewfile.server`にまとめる。
 
-- `Brewfile.server`: Node.js 24・uv（brew）、Tailscale・Claude Code・Codex CLI（cask）、n8n（npm）
+- `Brewfile.server`: Node.js 24・uv（brew）、Tailscale・Claude Code・Codex CLI・Google Chrome（cask）、n8n（npm）
 - `setup-server.sh`: OS設定、n8nのネイティブ依存の準備と常駐設定、Python環境の作成
 - `server/requirements.txt`: LangGraphなどのPython依存
 
@@ -40,8 +41,10 @@ n8nはインターネットやLANへ直接公開せず、`127.0.0.1:5678`だけ�
 ssh -L 5678:127.0.0.1:5678 <user>@<tailscale-hostname>
 ```
 
-接続中に手元のブラウザで <http://127.0.0.1:5678> を開く。セットアップ後の確認は
-次で行う。
+接続中に手元のChromeで <http://localhost:5678> を開く。Mac mini上で直接操作する
+場合も、Chromeで同じURLを開く。ローカルHTTPではSafariのSecure Cookie制約を
+避けるため、Chromeと`localhost`を使用し、`N8N_SECURE_COOKIE`は無効化しない。
+セットアップ後の確認は次で行う。
 
 ```sh
 ./server/healthcheck.sh
