@@ -60,6 +60,10 @@ source "$HOME/.local/share/kenta-os/python/bin/activate"
 Tailscale、Claude Code、Codexは初回のみ対話的なログインが必要。FileVaultが有効な
 Macは、停電からの再起動後にローカルでのロック解除が必要になる場合がある。
 
+ログイン後は、[n8nからClaudeを単発実行する動作テスト](docs/ai-smoke-test.md)へ進む。
+手動トリガーのテンプレートと、結果をローカル保存する固定スクリプトを提供する。
+定期実行・外部サービス操作は、このテストでは有効にしない。
+
 ## クライアントMac
 
 ```

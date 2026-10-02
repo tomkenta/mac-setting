@@ -1,0 +1,45 @@
+{
+  "name": "AI smoke test - manual only",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "c08fd0d2-68ea-4130-b31b-f7d205da41b2",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "authentication": "password",
+        "resource": "command",
+        "operation": "execute",
+        "command": "/bin/bash \"$HOME/mac-setting/server/run-ai-smoke.sh\"",
+        "cwd": "/"
+      },
+      "id": "c6d7f00f-33ac-4fd8-a3fb-2cb144eec3bf",
+      "name": "Run Claude on Mac mini",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [240, 0],
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "jsCode": "const reply = $input.first().json;\nif (reply.code !== 0) {\n  throw new Error('AI smoke test failed. Check the SSH node output and Mac mini logs; no automatic retry.');\n}\nconst result = JSON.parse(reply.stdout);\nif (result.status !== 'ok' || !result.report_path) {\n  throw new Error('AI smoke test returned an invalid result.');\n}\nreturn [{ json: result }];"
+      },
+      "id": "6c15b6c8-bf66-4f77-bbc6-a77bb8cf83a6",
+      "name": "Verify saved report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 0]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": { "main": [[{ "node": "Run Claude on Mac mini", "type": "main", "index": 0 }]] },
+    "Run Claude on Mac mini": { "main": [[{ "node": "Verify saved report", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1", "executionTimeout": 240 },
+  "pinData": {}
+}
