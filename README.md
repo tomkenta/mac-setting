@@ -62,8 +62,7 @@ Tailscale、Claude Code、Codexは初回のみ対話的なログインが必要�
 Macは、停電からの再起動後にローカルでのロック解除が必要になる場合がある。
 
 デスクトップ版は `claude` / `chatgpt`、CLI版は `claude-code` / `codex` という
-別のcaskで管理する。Codexデスクトップ機能はChatGPTアプリに統合されており、
-旧 `codex-app` caskは廃止予定のため新規導入しない。
+別のcaskで管理する。
 Mac miniの画面共有からアプリを開き、初回ログインと
 スマホへのリモート接続設定を行う。インストールだけではリモート操作は有効にならない。
 
