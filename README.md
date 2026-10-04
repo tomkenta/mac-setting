@@ -36,7 +36,7 @@ OS設定が済んだMacへ共通ツールだけ導入する場合:
 ```sh
 ./scripts/install-work-tools.sh
 gh auth login
-gh auth setup-git
+./scripts/setup-git-auth.sh
 ./scripts/setup-workspace.sh --server  # Airは --server を外す
 ```
 
@@ -51,6 +51,8 @@ Mac miniでは `dotfiles/install.sh --server` により共通のシェル・Git�
 クライアント固有のfish・Karabiner・Ghostty設定は省く。管理対象設定は置き換えるが、
 Claude/Codexの認証、ブラウザのログイン、CodexのローカルMCP設定は保持する。
 Git identityは各端末の `~/.config/git/config.local` に設定する。
+認証helperも同ファイルに分離する。dotfiles適用後は `gh auth setup-git` が
+管理対象のGit設定へ書き込む場合があるため、上記スクリプトを使う。
 
 外部脳は両端末で読み書き可能。編集前に同期し、同じノートの同時編集は避ける。
 未コミットの状態は同期されない。競合は内容を確認して解消し、自動で片側を採用しない。

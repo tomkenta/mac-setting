@@ -50,4 +50,24 @@ class WorkspaceTest < Minitest::Test
       assert_includes out, "detached HEAD"
     end
   end
+
+  def test_git_auth_helper_does_not_write_through_managed_symlink
+    Dir.mktmpdir do |home|
+      FileUtils.mkdir_p(File.join(home, ".config/git"))
+      FileUtils.mkdir_p(File.join(home, "bin"))
+      tracked = File.join(home, "tracked-config")
+      File.write(tracked, "[core]\n  editor = vim\n")
+      File.symlink(tracked, File.join(home, ".config/git/config"))
+      gh = File.join(home, "bin/gh")
+      File.write(gh, "#!/bin/sh\nexit 0\n")
+      FileUtils.chmod(0755, gh)
+      out, status = Open3.capture2e({"HOME" => home, "PATH" => "#{home}/bin:#{ENV['PATH']}"},
+                                   "bash", File.join(ROOT, "scripts/setup-git-auth.sh"))
+      assert status.success?, out
+      assert_equal "[core]\n  editor = vim\n", File.read(tracked)
+      config = File.read(File.join(home, ".config/git/config.local"))
+      assert_includes config, "#{gh} auth git-credential"
+      refute_includes config, "gho_"
+    end
+  end
 end
