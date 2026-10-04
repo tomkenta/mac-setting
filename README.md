@@ -1,265 +1,193 @@
-# Mac 用の環境構築自動化設定ファイル
+# mac-setting
 
-このリポジトリは、用途ごとに2つのセットアップを提供する。
+## 1. 目的
 
-- `setup.sh`: 普段使いのクライアントMac
-- `setup-server.sh`: 24時間稼働するMac miniサーバー
+クライアントMac（MacBook Air）とサーバーMac（Mac mini）に、共通のAI作業ツールと用途別の環境を構築する。
 
-## Mac miniサーバー
+アプリ・CLIの導入とmacOSの設定をこのリポジトリで管理し、シェル・Git・AI指示などの個人設定は [dotfiles](https://github.com/tomkenta/dotfiles) に任せる。
 
-```sh
-git clone https://github.com/tomkenta/mac-setting.git
-cd mac-setting
-./setup-server.sh
+## 2. 対象・対象外
+
+| 対象 | 管理するもの |
+|---|---|
+| 共通 | Git・gh・ghq・tmux・Node.js 24・uv・シェル補助ツール・Claude/Codex CLI・Claude・Chrome・Tailscale |
+| クライアントMac | クライアント用アプリ、VS Code設定、tmuxプラグイン、キーボード・Dock・トラックパッド設定 |
+| サーバーMac | SSH・画面共有・ファイアウォール・電源設定、n8n常駐、Python 3.12・LangGraph |
+| 作業リポジトリ | mac-setting・dotfiles・external_brain・x-postingの明示的な取得・更新 |
+
+対象端末はmacOSの個人用Mac。クライアントの一括セットアップはApple Silicon前提、サーバーもApple Silicon向けに設計している。Intelでの一括セットアップは保証しない。
+
+管理しないもの:
+
+- dotfilesの設定内容（別リポジトリで管理）
+- パスワード・APIキー・ブラウザのログイン状態の同期
+- GitHub・Tailscale・Claude・Codexなどの本人認証
+- リポジトリの自動定期同期、未コミット変更の端末間転送
+- 業務自動化の内容、n8nの本番ワークフロー、AIの24時間自律稼働の保証
+
+## 3. 構成
+
+### パッケージと端末別設定
+
+```text
+Brewfile.common ─┬─ Brewfile        ← setup.sh（クライアント）
+                └─ Brewfile.server ← setup-server.sh（サーバー）
+
+setup.sh
+  └─ scripts/setup-workspace.sh
+       ├─ scripts/sync-repos.sh
+       └─ dotfiles/install.sh
+
+setup-server.sh
+  └─ OS・パッケージ・n8n・Pythonを設定
+     作業リポジトリ／dotfilesは別途 setup-workspace.sh --server
 ```
 
-サーバー用セットアップは、クライアント用の`Brewfile`を参照しない。専用の
-`Brewfile.server`だけを使い、次を構成する。
+| ファイル | 責務 |
+|---|---|
+| `Brewfile.common` | 両端末で使う共通パッケージ |
+| `Brewfile` / `Brewfile.server` | 共通パッケージを読み込み、端末固有のパッケージを追加 |
+| `setup.sh` | クライアントの一括セットアップ |
+| `setup-server.sh` | サーバーの一括セットアップ |
+| `scripts/install-work-tools.sh` | 共通パッケージのみ導入。OS設定やn8n再起動はしない |
+| `scripts/setup-git-auth.sh` | GitHub認証helperを端末ローカルのGit設定に登録 |
+| `scripts/sync-repos.sh` | 4リポジトリをclone／pull。設定適用はしない |
+| `scripts/setup-workspace.sh` | リポジトリ同期後、dotfilesのinstall.shを呼ぶ |
+| `server/healthcheck.sh` | サーバーのサービスと主要依存を確認 |
 
-- SSH（リモートログイン）と画面共有
-- macOSファイアウォールとサーバー向け電源設定
-- Tailscale
-- n8n（ユーザー権限のLaunchDaemonとして常時起動）
-- Claude CodeとCodex CLI
-- Claude・ChatGPTのデスクトップアプリ（Codexとスマホからのリモート操作用）
-- Python 3.12環境、uv、LangGraph
-- Google Chrome（n8nの初回設定・管理画面用）
+作業リポジトリの標準配置は `~/src/github.com/tomkenta/{mac-setting,dotfiles,external_brain,x-posting}`。
+ワークスペース関連スクリプトは環境変数 `WORKSPACE_ROOT` で配置先を変更できる。
 
-共通の作業ツールは`Brewfile.common`、サーバー固有の追加分は`Brewfile.server`にまとめる。
+### dotfilesとの分担
 
-## 共通のAI作業環境（Air / Mac mini）
+mac-settingは「ツールを入れる・OSを設定する・設定適用を呼ぶ」担当。
+dotfilesは「管理対象の個人設定をホームへ配置する」担当で、パッケージ導入は行わない。
 
-`Brewfile`（クライアント）と`Brewfile.server`は同じ`Brewfile.common`を読み込む。
-Git・gh・ghq・tmux・シェル補助ツール・Node.js 24・uv・AI CLI・Claude・Chrome・Tailscaleを共有する。
-OS設定が済んだMacへ共通ツールだけ導入する場合:
+`setup-workspace.sh` は、取得したdotfilesの `install.sh` を直接実行する。
+`--server` を指定すると、dotfilesもサーバープロファイルで適用する。
+
+## 4. 使い方
+
+### 前提条件
+
+- macOSの初期セットアップと管理者アカウントの作成が済んでいること。
+- インターネット接続とGitが使えること。Gitが未導入なら `xcode-select --install` でCommand Line Toolsを導入する。
+- サーバーでは、実行するTerminal等へ「システム設定 → プライバシーとセキュリティ → フルディスクアクセス」を許可すること。SSHの有効化に必要。
+- privateリポジトリ取得にはGitHub認証が必要。
+
+まず、このリポジトリを標準配置へ取得する。
+
+```sh
+mkdir -p ~/src/github.com/tomkenta
+git clone https://github.com/tomkenta/mac-setting.git ~/src/github.com/tomkenta/mac-setting
+cd ~/src/github.com/tomkenta/mac-setting
+```
+
+取得済みならcloneを繰り返さず、既存のディレクトリへ移動する。
+
+### 初回セットアップ：クライアントMac
+
+`setup.sh` は途中でprivateリポジトリも取得するため、先にHomebrew・共通ツールとGitHub認証を準備する。
+Homebrew未導入の場合は [公式手順](https://brew.sh/) で導入し、案内されるshellenvを実行する。
 
 ```sh
 ./scripts/install-work-tools.sh
 gh auth login
 ./scripts/setup-git-auth.sh
-./scripts/setup-workspace.sh --server  # Airは --server を外す
+./setup.sh
 ```
 
-作業リポジトリは `~/src/github.com/tomkenta/{mac-setting,dotfiles,external_brain,x-posting}`。
-`~/mac-setting`に既存checkoutがある場合、変更がないことを確認してからghq配下へ移す。
-自動の定期同期は行わない。明示的な更新は `./scripts/sync-repos.sh`。
-未コミット変更・未追跡ファイル・detached HEAD・upstream未設定・予期しないoriginでは
-そのリポジトリを触らず非ゼロ終了する。更新は `git pull --ff-only`のみで、stash/reset/自動commitをしない。
+最後に、各アプリのログイン、TailscaleのVPN・システム拡張許可、Touch ID、Alfredのライセンス・設定フォルダ指定、Rectangleの設定インポートなどを手動で行う。
 
-dotfilesは設定のみ適用し、ツールを追加インストールしない。
-Mac miniでは `dotfiles/install.sh --server` により共通のシェル・Git・tmux・AI指示を適用し、
-クライアント固有のfish・Karabiner・Ghostty設定は省く。管理対象設定は置き換えるが、
-Claude/Codexの認証、ブラウザのログイン、CodexのローカルMCP設定は保持する。
-Git identityは各端末の `~/.config/git/config.local` に設定する。
-認証helperも同ファイルに分離する。dotfiles適用後は `gh auth setup-git` が
-管理対象のGit設定へ書き込む場合があるため、上記スクリプトを使う。
+### 初回セットアップ：サーバーMac
 
-外部脳は両端末で読み書き可能。編集前に同期し、同じノートの同時編集は避ける。
-未コミットの状態は同期されない。競合は内容を確認して解消し、自動で片側を採用しない。
-ブラウザ操作の接続・権限・各サービスのログインは端末ごとに確認する。
+```sh
+./setup-server.sh
+gh auth login
+./scripts/setup-git-auth.sh
+./scripts/setup-workspace.sh --server
+./server/healthcheck.sh
+```
 
-フリマ販促の初回検証は出品状況の読み取りと提案だけ。値下げ・投稿・削除・購入・
-口座/本人情報の変更は行わない。
+TailscaleへログインしてVPN・システム拡張を許可し、Claude/Codexにもログインする。
+ブラウザ拡張・リモート操作の接続許可とサービスへのログインは端末ごとに行う。
 
-- `Brewfile.server`: Node.js 24・uv（brew）、Tailscale・Claude Code・Codex CLI・Claudeアプリ・ChatGPTアプリ（Codexを含む）・Google Chrome（cask）、n8n（npm）
-- `setup-server.sh`: OS設定、n8nのネイティブ依存の準備と常駐設定、Python環境の作成
-- `server/requirements.txt`: LangGraphなどのPython依存
-
-`./setup-server.sh`がインストールから設定まで一括実行するため、別途`npm install`を
-実行する必要はない。Node.jsは他のバージョンを強制的にリンクし直さず、サーバーの
-セットアップとn8n起動時だけNode.js 24を優先する。
-
-n8nはインターネットやLANへ直接公開せず、`127.0.0.1:5678`だけで待ち受ける。
-外出先からはTailscale経由のSSHトンネルを使う。
+n8nはChromeで <http://localhost:5678> を開き、初回のownerアカウントを作成する。
+別端末からはTailscale接続後にSSHトンネルを使う。
 
 ```sh
 ssh -L 5678:127.0.0.1:5678 <user>@<tailscale-hostname>
 ```
 
-接続中に手元のChromeで <http://localhost:5678> を開く。Mac mini上で直接操作する
-場合も、Chromeで同じURLを開く。ローカルHTTPではSafariのSecure Cookie制約を
-避けるため、Chromeと`localhost`を使用し、`N8N_SECURE_COOKIE`は無効化しない。
-セットアップ後の確認は次で行う。
+トンネル接続中、手元のChromeで <http://localhost:5678> を開く。
+画面共有はFinderの「移動 → サーバへ接続」で `vnc://<tailscale-hostname>` を指定する。
+
+### 既存環境への再適用
+
+必要な部分だけ実行する。一括セットアップはOS設定やサービスにも影響する。
+
+| やりたいこと | コマンド（mac-setting内で実行） |
+|---|---|
+| 共通ツールだけ導入・更新 | `./scripts/install-work-tools.sh` |
+| リポジトリを同期して設定適用：クライアント | `./scripts/setup-workspace.sh` |
+| リポジトリを同期して設定適用：サーバー | `./scripts/setup-workspace.sh --server` |
+| 同期せずdotfilesだけ再適用：クライアント | `sh ../dotfiles/install.sh` |
+| 同期せずdotfilesだけ再適用：サーバー | `sh ../dotfiles/install.sh --server` |
+
+上記のdotfiles直接実行は標準配置の場合。取得先を変更した場合は実際のパスを指定する。
+
+### 更新
 
 ```sh
+./scripts/sync-repos.sh
+```
+
+未取得ならclone、取得済みなら `git pull --ff-only` を実行する。パッケージの更新やdotfilesの再適用は別操作。
+dotfilesのリンク済みファイルはpull後の内容が参照されるため、更新は稼働中の設定にも影響し得る。Codexのマージ設定や新しいリンクの追加には再適用が必要。
+
+同期前に各リポジトリの変更を確認する。ノートを含め同じファイルの端末間同時編集を避ける。
+未コミットの内容は同期されない。
+
+### 状態確認
+
+```sh
+git status --short
+brew bundle check --file=Brewfile.common
+# クライアントのパッケージ
+brew bundle check --file=Brewfile
+# サーバーのパッケージ・サービス
+brew bundle check --file=Brewfile.server
 ./server/healthcheck.sh
 ```
 
-画面共有は、Tailscale接続後にFinderの「移動 > サーバへ接続」から
-`vnc://<tailscale-hostname>`を開く。LangGraph用Python環境は次で有効化する。
+自分の端末に対応するチェックだけ実行する。パッケージチェックはログインやブラウザ接続の確認にはならない。
+サーバーの追加手順は [ホームサーバー手順](docs/home-server.md)、任意の単発AI試験は [動作テスト](docs/ai-smoke-test.md) を参照する。
 
-```sh
-source "$HOME/.local/share/kenta-os/python/bin/activate"
-```
+## 5. 注意事項
 
-Tailscale、Claude Code、Codexは初回のみ対話的なログインが必要。FileVaultが有効な
-Macは、停電からの再起動後にローカルでのロック解除が必要になる場合がある。
+### 上書き・サービスへの影響
 
-デスクトップ版は `claude` / `chatgpt`、CLI版は `claude-code` / `codex` という
-別のcaskで管理する。
-Mac miniの画面共有からアプリを開き、初回ログインと
-スマホへのリモート接続設定を行う。インストールだけではリモート操作は有効にならない。
+- クライアントはVS Codeの設定リンクとmacOS defaultsを変更し、Dockを再起動する。
+- dotfilesの管理対象ファイルは置き換える。詳細は [dotfiles README](https://github.com/tomkenta/dotfiles#readme) を確認し、既存設定を退避してから適用する。
+- サーバーはSSH・画面共有・ファイアウォール・電源設定を変更する。画面共有を再起動するため、接続が切れる可能性がある。
+- サーバーの再実行ではn8nの依存をrebuildし、LaunchDaemon設定を上書きしてn8nを再起動する。データと既存の空でない暗号化キーは保持する。バックアップの代わりにはならない。
 
-必要になったら、[n8nからClaudeを単発実行する動作テスト](docs/ai-smoke-test.md)を使える。
-手動トリガーのテンプレートと、結果をローカル保存する固定スクリプトを提供する。
-定期実行・外部サービス操作は、このテストでは有効にしない。
+n8nデータは `~/Library/Application Support/KentaOS/n8n`、ログは `~/Library/Logs/KentaOS`、
+Python環境は `~/.local/share/kenta-os/python` に置く。n8nは `127.0.0.1:5678` のみで待ち受け、直接外部公開しない。
 
-## クライアントMac
+### 認証・端末ローカル設定
 
-```
-git clone https://github.com/tomkenta/mac-setting.git
-cd mac-setting
-./setup.sh
-```
+Git identityは `~/.config/git/config.local`、シェルの秘密情報は `~/.config/zsh/.zshrc.local` に置き、Gitへ登録しない。
+Git identity未設定ではdotfilesの `useConfigOnly=true` によりcommitを拒否する。
+認証helper登録には `scripts/setup-git-auth.sh` を使う。`gh auth setup-git` はリンクされた管理対象設定を書き換える場合がある。
 
-`./setup.sh` will take 30mins - 1 hours. Do something else
+Tailscale・GitHub・AIツール・ブラウザの認証は手動。FileVault有効時は、再起動後に現地でのロック解除が必要になる場合がある。
 
-クライアント用`Brewfile`にもTailscale Standalone版（`tailscale-app`）を含める。
-インストール後にTailscaleを開き、Mac miniと同じログイン方法・同じ個人アカウントで
-ログインする。VPN構成・システム拡張の許可は初回のみGUIで行う。
-Tailscaleのアカウント情報や認証キーは、このリポジトリには保存しない。
+### 再実行時の挙動・既知の制約
 
-ex.
-1. System Settings > Keyboard > modifier key > swap caps and control
-2. System Settings > Accessibility > Keyboard > Trackpad option > enable dragging > without drag lock  
-
-others,. do others related to your job
-
-## 構成と設計方針
-
-このリポジトリ (`mac-setting`) は **Mac キッティングのオーケストレーション**。
-個人の portable な設定は別リポジトリ **[dotfiles](https://github.com/tomkenta/dotfiles)** が持ち、
-`setup.sh` が symlink で配置する。
-
-- `mac-setting`: `setup.sh`（手順）/ `Brewfile`（アプリ・CLI）/ アプリ別設定（`vscode/` `alfred/` `RectangleConfig.json`）
-- `dotfiles`: `.gitconfig` / fish / karabiner / git hooks など。個人設定の単一の源。
-
-### セキュリティ設計（要点）
-- **編集・push は個人マシンから。会社PCは clone/pull（参照）のみ。**
-  会社環境でのコミットは identity（社用メール・社内ホスト名）の焼き付きや機密の巻き込みを招くため。
-- **identity をホスト名から自動生成させない** — dotfiles `.gitconfig` の `useConfigOnly = true`。
-  未設定のまま commit するとエラーになり、`名前@ホスト名` の混入を防ぐ。
-- **全 repo で gitleaks スキャン** — dotfiles の `core.hooksPath` → pre-commit / pre-push で実行。
-- **機密の "具体値" はどの repo にも置かない** — gitleaks の具体ルール（前職ドメイン等）は
-  `~/.gitleaks.toml`（`$HOME` 直下・非追跡）にのみ書き、追跡ファイル（`setup.sh` 等）には
-  汎用パターンのみ記載する。
-
-## directory structure
-```
-└->$ tree -L 1
-.
-├── Applications (local applications)
-├── Box (need to install box-drive, this is where backup local files)
-├── Desktop (We don't use , don't wanna mess here)
-├── Documents 
-├── Downloads
-├── Library
-├── Movies
-├── Music
-├── Pictures
-├── Public
-├── code
-└── work
-
-(DONT PUT files in home directory except dotfiles))
-```
-## System Settings
-Basically it can be configured in automation script , but some of them still should be set in GUI
-
-- Touch ID
-register your fingerprint
-
-tick
-[] unlock your mac
-[] password auto fill
-
-
-## Alfred
-begin setup -> activate powerpack ( search activation code there ) -> open alfred preference -> advanced -> Syncing -> set preference folder -> setting file "alfred/Alfred.alfredpreferences"
-
-turn off spotlight hotkey （spotlight -> turn off the shortcut)
-change hotkey to cmd + space
-
-see for backup and retrieve setting https://www.alfredapp.com/help/advanced/sync/
-
-
-
-## rectangle
-open -> import the RectangleConfig.json
-
-## google japanese ime
-System Settings > Keyboard > input source > + > Google Hiragana > OK
-you can now change by ctrl + space
-
-## karabiner-element
-open is just ( .config/karabiner will work soon)
-
---- outdated
-function key > use F1, F2 as function key
-simple 
-
-simple modification
-caps / ctrl swap
-
-complex > add rule > import more from network > serach japanese > import  For Japanese （日本語環境向けの設定） (rev 5)
-add
-- コマンドキーを単体で押したときに、英数・かなキーを送信する。（左コマンドキーは英数、右コマンドキーはかな） (rev 3)
-- escキーを押したときに、英数キーも送信する（vim用）
-- Ctrl+[を押したときに、escキーと英数キーを送信する
----
-
-
-once open ( swap ctrl / caps will be removed)
-      
-## google chrome 
-open -> google account login -> import bookmarks -> import extensions
-
-- import bookmarks 
-
-import exported html from cloud strage ( job , personal)
-or 
-connected with google account ( personal) 
-
-### import exported html from cloud strage ( job , personal)
-see https://support.google.com/chrome/answer/96816?hl=ja
-
-### connected with google account ( personal) 
-just login with your google account and turn on sync
-
-- import extension
-
-sign in with google account to restore extensions, or install manually:
-
-- [ActivityWatch Web Watcher](https://chromewebstore.google.com/detail/activitywatch-web-watcher/nglaklhklhcoonedhgnpgddginnjdadi)
-- [BlockSite: Block Websites & Stay Focused](https://chromewebstore.google.com/detail/block-site-website-blocke/eiimnmioipafcokbfikbljfdeojpcgbh)
-- [Buffer](https://chromewebstore.google.com/detail/buffer/noojglkidnpfjbincgijbaiedldjfbhh)
-- [Claude](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn)
-- [Codex](https://chromewebstore.google.com/detail/codex/hehggadaopoacecdllhhajmbjkdcmajg)
-- [Copy Title and Url as Markdown Style](https://chromewebstore.google.com/detail/copy-title-and-url-as-mar/fpmbiocnfbjpajgeaicmnjnnokmkehil)
-- [GoFullPage - Full Page Screen Capture](https://chromewebstore.google.com/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl)
-- [Google Docs Offline](https://chromewebstore.google.com/detail/google-docs-offline/ghbmnnjooekpmoecnnnilnnbdlolhkhi)
-- [Grammarly](https://chromewebstore.google.com/detail/grammarly-for-chrome/kbfnbcaeplbcioakkpcpgfkobkghlhen)
-- [LastPass: Free Password Manager](https://chromewebstore.google.com/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd)
-- [Notion Boost](https://chromewebstore.google.com/detail/notion-boost/eciepnnimnjaojlkcpdpcgbfkpcagahd)
-- [Save to Notion](https://chromewebstore.google.com/detail/save-to-notion/ldmmifpegigmeammaeckplhnjbbpccmm)
-- [TabCopy](https://chromewebstore.google.com/detail/tabcopy/micdllihgoppmejpecmkilggmaagfdmb)
-- [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
-
-## ActivityWatch
-ActivityWatch はアプリ使用時間・Web 閲覧を自動で記録するローカルタイムトラッカー。
-`brew install --cask activitywatch` でインストール済み（Brewfile 管理）。
-
-Chrome での Web 閲覧を記録するには上の **ActivityWatch Web Watcher** 拡張をインストールし、
-ActivityWatch アプリを起動した状態で使用する。
-
-## scroll
-https://ryanhanson.dev/scroll  > open > System Settings > Privacy & Security > Accessibility > tick it
-
-tap scroll on nav bar > scroll with one finger > hold 
-> launch on login
-
-enter license key: Scroll menu bar icon > Enter License Key
-
-## Cloud Storage Link
-(BOX)
-box share ( can cask)
+- 完全な冪等性や同一バージョンの再現は保証しない。パッケージは更新され得る。
+- 同期は未コミット変更（未追跡ファイルを含む）、detached HEAD、upstream未設定、想定外origin、非独立checkoutを検出すると、そのリポジトリを変更せず失敗扱いにする。他のリポジトリの同期は続くため、処理全体は一括ロールバックされない。
+- originの許容形式は `https://github.com/tomkenta/<repo>.git` と `git@github.com:tomkenta/<repo>.git` のみ。`ssh://git@github.com/...` は現状拒否する。
+- 同期が一つでも失敗すると、`setup-workspace.sh` はdotfiles適用前に止まる。設定だけ適用したい場合はdotfilesを直接実行する。
+- `setup.sh` はbrew bundleの失敗後も続行する。`setup-server.sh` は最後のhealthcheck失敗でも完了表示する。完了メッセージだけで成功判定せず、個別チェックを確認する。
+- 自動バックアップ・ロールバックはない。会社PCへの適用は対象外とし、機密情報をリポジトリへ持ち込まない。
