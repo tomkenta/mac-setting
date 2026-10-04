@@ -7,17 +7,8 @@ server_prefix = ENV.fetch("HOMEBREW_PREFIX")
 ENV["PATH"] = "#{server_prefix}/opt/node@24/bin:#{server_prefix}/bin:#{ENV.fetch('PATH')}"
 ENV["NPM_CONFIG_PREFIX"] = server_prefix
 
-brew "node@24"
-brew "uv"
-
-cask "tailscale-app"
-cask "claude-code"
-cask "codex"
-# Desktop apps for interactive work and mobile remote control (separate from CLI).
-cask "claude"
+instance_eval(File.read(File.join(__dir__, "Brewfile.common")), File.join(__dir__, "Brewfile.common"))
 cask "chatgpt"
-# n8n's local HTTP setup uses Chrome at localhost with secure cookies enabled.
-cask "google-chrome"
 
 # Homebrew Bundle supports npm packages as well as formulae and casks.
 # setup-server.sh prepares n8n's native dependencies after Bundle installs it.

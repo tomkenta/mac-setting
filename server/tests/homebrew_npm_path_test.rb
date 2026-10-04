@@ -23,7 +23,8 @@ Dir.mktmpdir("mac-setting-homebrew-path-") do |test_prefix|
   # Evaluate the actual Brewfile inside Homebrew's already-filtered environment.
   recorder = Object.new
   [:brew, :cask, :npm].each { |type| recorder.define_singleton_method(type) { |_name| } }
-  recorder.instance_eval(File.read(File.join(repo_dir, "Brewfile.server")))
+  brewfile = File.join(repo_dir, "Brewfile.server")
+  recorder.instance_eval(File.read(brewfile), brewfile)
 
   # Like first setup, the versioned runtime appears only after the Brewfile loads.
   FileUtils.mkdir_p(node_bin)

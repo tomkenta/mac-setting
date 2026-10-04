@@ -25,7 +25,39 @@ cd mac-setting
 - Python 3.12環境、uv、LangGraph
 - Google Chrome（n8nの初回設定・管理画面用）
 
-インストール対象の変更は`Brewfile.server`にまとめる。
+共通の作業ツールは`Brewfile.common`、サーバー固有の追加分は`Brewfile.server`にまとめる。
+
+## 共通のAI作業環境（Air / Mac mini）
+
+`Brewfile`（クライアント）と`Brewfile.server`は同じ`Brewfile.common`を読み込む。
+Git・gh・ghq・tmux・シェル補助ツール・Node.js 24・uv・AI CLI・Claude・Chrome・Tailscaleを共有する。
+OS設定が済んだMacへ共通ツールだけ導入する場合:
+
+```sh
+./scripts/install-work-tools.sh
+gh auth login
+gh auth setup-git
+./scripts/setup-workspace.sh --server  # Airは --server を外す
+```
+
+作業リポジトリは `~/src/github.com/tomkenta/{mac-setting,dotfiles,external_brain,x-posting}`。
+`~/mac-setting`に既存checkoutがある場合、変更がないことを確認してからghq配下へ移す。
+自動の定期同期は行わない。明示的な更新は `./scripts/sync-repos.sh`。
+未コミット変更・未追跡ファイル・detached HEAD・upstream未設定・予期しないoriginでは
+そのリポジトリを触らず非ゼロ終了する。更新は `git pull --ff-only`のみで、stash/reset/自動commitをしない。
+
+dotfilesは設定のみ適用し、ツールを追加インストールしない。
+Mac miniでは `dotfiles/install.sh --server` により共通のシェル・Git・tmux・AI指示を適用し、
+クライアント固有のfish・Karabiner・Ghostty設定は省く。管理対象設定は置き換えるが、
+Claude/Codexの認証、ブラウザのログイン、CodexのローカルMCP設定は保持する。
+Git identityは各端末の `~/.config/git/config.local` に設定する。
+
+外部脳は両端末で読み書き可能。編集前に同期し、同じノートの同時編集は避ける。
+未コミットの状態は同期されない。競合は内容を確認して解消し、自動で片側を採用しない。
+ブラウザ操作の接続・権限・各サービスのログインは端末ごとに確認する。
+
+フリマ販促の初回検証は出品状況の読み取りと提案だけ。値下げ・投稿・削除・購入・
+口座/本人情報の変更は行わない。
 
 - `Brewfile.server`: Node.js 24・uv（brew）、Tailscale・Claude Code・Codex CLI・Claudeアプリ・ChatGPTアプリ（Codexを含む）・Google Chrome（cask）、n8n（npm）
 - `setup-server.sh`: OS設定、n8nのネイティブ依存の準備と常駐設定、Python環境の作成

@@ -30,16 +30,19 @@ class ServerPackageSetupTest < Minitest::Test
     original_environment = ENV.to_h
     begin
       ENV["HOMEBREW_PREFIX"] = "/test-homebrew"
-      recorder.instance_eval(File.read(File.join(REPO_DIR, "Brewfile.server")))
+      path = File.join(REPO_DIR, "Brewfile.server")
+      recorder.instance_eval(File.read(path), path)
       assert ENV["PATH"].start_with?("/test-homebrew/opt/node@24/bin:")
       assert_equal "/test-homebrew", ENV["NPM_CONFIG_PREFIX"]
     ensure
       ENV.replace(original_environment)
     end
-    assert_equal [[:brew, "node@24"], [:brew, "uv"],
-                  [:cask, "tailscale-app"], [:cask, "claude-code"],
-                  [:cask, "codex"], [:cask, "claude"], [:cask, "chatgpt"],
-                  [:cask, "google-chrome"], [:npm, "n8n"]], recorder.entries
+    assert_includes recorder.entries, [:brew, "node@24"]
+    assert_includes recorder.entries, [:brew, "ghq"]
+    assert_includes recorder.entries, [:cask, "google-chrome"]
+    assert_includes recorder.entries, [:cask, "chatgpt"]
+    assert_includes recorder.entries, [:npm, "n8n"]
+    assert_equal recorder.entries.uniq, recorder.entries
     refute_match(/\bnpm install\b|\bbrew install\b|\bbrew link\b/, PACKAGE_SETUP)
     refute_includes SETUP, 'node@22'
   end

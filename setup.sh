@@ -3,7 +3,6 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
-DOTFILES=~/src/github.com/tomkenta/dotfiles
 
 echo "==> [1/8] Homebrew"
 command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -16,33 +15,7 @@ export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 brew bundle --file="$REPO_DIR/Brewfile" || true
 
 echo "==> [3/8] dotfiles"
-[ -d "$DOTFILES" ] || git clone https://github.com/tomkenta/dotfiles.git "$DOTFILES"
-
-for f in \
-  .zprofile \
-  .zshrc \
-  .bash_profile \
-  .bashrc \
-  .vimrc \
-  .tmux.conf \
-  .gitconfig \
-  .gitattributes \
-  .gitignore_global; do
-  ln -sf "$DOTFILES/$f" ~/"$f"
-done
-
-# ~/.config は丸ごとリンクせず必要なサブディレクトリのみリンク
-# (丸ごとリンクすると他ツールの設定を壊す & git repo が汚れる)
-mkdir -p ~/.config
-ln -sfn "$DOTFILES/.config/fish"      ~/.config/fish
-ln -sfn "$DOTFILES/.config/karabiner" ~/.config/karabiner
-ln -sfn "$DOTFILES/.config/ghostty"   ~/.config/ghostty
-ln -sfn "$DOTFILES/.config/git"       ~/.config/git   # git hooks (gitleaks 等)
-
-# Claude Code の自作スクリプト（個別ファイルのみリンク。~/.claude はツール管理ディレクトリ）
-mkdir -p ~/.claude
-ln -sf "$DOTFILES/.claude/statusline.sh"         ~/.claude/statusline.sh
-ln -sf "$DOTFILES/.claude/statusline-command.sh" ~/.claude/statusline-command.sh
+"$REPO_DIR/scripts/setup-workspace.sh"
 
 echo "==> [4/8] git シークレットスキャンのローカル設定"
 # git の identity 焼き付き防止 (useConfigOnly) と hooksPath は dotfiles の .gitconfig 側で管理。
@@ -81,11 +54,7 @@ for repo in tpm tmux-battery tmux-cpu tmux-resurrect; do
     git clone "https://github.com/tmux-plugins/$repo.git" "$TMUX_PLUGINS/$repo"
 done
 
-echo "==> [7/8] fisher"
-mkdir -p "$DOTFILES/.config/fish/functions"
-[ -f "$DOTFILES/.config/fish/functions/fisher.fish" ] || \
-  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish \
-    -o "$DOTFILES/.config/fish/functions/fisher.fish"
+echo "==> [7/8] optional fish configuration is managed by dotfiles"
 
 echo "==> [8/8] macOS defaults"
 defaults write NSGlobalDomain InitialKeyRepeat         -int 15
