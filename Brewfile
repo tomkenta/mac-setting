@@ -23,6 +23,8 @@ brew "wget"
 instance_eval(File.read(File.join(__dir__, "Brewfile.common")), File.join(__dir__, "Brewfile.common"))
 cask "activitywatch"
 
+# 1Password はブラウザ連携・Touch ID のため /Applications 直下が必須（setup.sh は ~/Applications 指定）
+cask "1password", args: { appdir: "/Applications" }
 cask "alfred"
 cask "antigravity"
 cask "bartender"

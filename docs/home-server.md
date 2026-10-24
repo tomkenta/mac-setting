@@ -26,6 +26,7 @@ cd mac-setting
 - Tailscale Standalone版をインストールして初回認証を開始
 - Node.js 24、n8n、Claude Code、Codex CLIをインストール
 - Claude・ChatGPTのデスクトップアプリをインストール（`claude` / `chatgpt` cask、CodexはChatGPTに含まれる）
+- 1Passwordをインストール（`1password` cask、`/Applications`直下に入れる）
 - Google Chromeをインストール（n8nの初回設定・管理画面用）
 - Python 3.12、uv、LangGraphをインストール
 - n8nをユーザー権限のLaunchDaemonとして常時起動
