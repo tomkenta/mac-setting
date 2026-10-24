@@ -9,6 +9,8 @@ ENV["NPM_CONFIG_PREFIX"] = server_prefix
 
 instance_eval(File.read(File.join(__dir__, "Brewfile.common")), File.join(__dir__, "Brewfile.common"))
 cask "chatgpt"
+# setup-server.sh は appdir を指定しないため /Applications に入る（1Password は /Applications 必須）
+cask "1password"
 
 # Homebrew Bundle supports npm packages as well as formulae and casks.
 # setup-server.sh prepares n8n's native dependencies after Bundle installs it.

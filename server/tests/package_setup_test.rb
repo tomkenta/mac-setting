@@ -41,6 +41,7 @@ class ServerPackageSetupTest < Minitest::Test
     assert_includes recorder.entries, [:brew, "ghq"]
     assert_includes recorder.entries, [:cask, "google-chrome"]
     assert_includes recorder.entries, [:cask, "chatgpt"]
+    assert_includes recorder.entries, [:cask, "1password"]
     assert_includes recorder.entries, [:npm, "n8n"]
     assert_equal recorder.entries.uniq, recorder.entries
     refute_match(/\bnpm install\b|\bbrew install\b|\bbrew link\b/, PACKAGE_SETUP)
