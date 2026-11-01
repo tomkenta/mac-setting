@@ -23,6 +23,10 @@ class ServerPackageSetupTest < Minitest::Test
     [:brew, :cask, :npm].each do |type|
       define_method(type) { |name| @entries << [type, name] }
     end
+
+    def mas(name, id:)
+      @entries << [:mas, name, id]
+    end
   end
 
   def test_all_server_software_is_declared_in_one_brewfile
@@ -39,6 +43,8 @@ class ServerPackageSetupTest < Minitest::Test
     end
     assert_includes recorder.entries, [:brew, "node@24"]
     assert_includes recorder.entries, [:brew, "ghq"]
+    assert_includes recorder.entries, [:brew, "mas"]
+    assert_includes recorder.entries, [:mas, "LINE", 539883307]
     assert_includes recorder.entries, [:cask, "google-chrome"]
     assert_includes recorder.entries, [:cask, "chatgpt"]
     assert_includes recorder.entries, [:cask, "1password"]

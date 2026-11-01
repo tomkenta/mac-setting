@@ -23,6 +23,7 @@ Dir.mktmpdir("mac-setting-homebrew-path-") do |test_prefix|
   # Evaluate the actual Brewfile inside Homebrew's already-filtered environment.
   recorder = Object.new
   [:brew, :cask, :npm].each { |type| recorder.define_singleton_method(type) { |_name| } }
+  recorder.define_singleton_method(:mas) { |_name, id:| }
   brewfile = File.join(repo_dir, "Brewfile.server")
   recorder.instance_eval(File.read(brewfile), brewfile)
 

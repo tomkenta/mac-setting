@@ -30,7 +30,10 @@ cd mac-setting
 ## 共通のAI作業環境（Air / Mac mini）
 
 `Brewfile`（クライアント）と`Brewfile.server`は同じ`Brewfile.common`を読み込む。
-Git・gh・ghq・tmux・シェル補助ツール・Node.js 24・uv・AI CLI・Claude・Chrome・Tailscaleを共有する。
+Git・gh・ghq・tmux・シェル補助ツール・Node.js 24・uv・AI CLI・Claude・Chrome・LINE・Tailscaleを共有する。
+LINEはMac App Store版をHomebrew Bundleの`mas`エントリで管理する（`line` caskは利用不可）。
+初回インストールにはApp StoreのApple Account認証が必要になる場合がある。
+インストール後にLINEへ本人アカウントでログインする。認証情報はリポジトリに保存しない。
 OS設定が済んだMacへ共通ツールだけ導入する場合:
 
 ```sh
