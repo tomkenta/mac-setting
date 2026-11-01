@@ -10,5 +10,6 @@ else
   echo "Homebrew is required; run the appropriate OS setup first." >&2
   exit 1
 fi
-export PATH="$(brew --prefix)/opt/node@24/bin:$PATH"
+BREW_PREFIX="$(brew --prefix)"
+export PATH="$BREW_PREFIX/opt/node@24/bin:$PATH"
 brew bundle --file="$REPO_DIR/Brewfile.common"

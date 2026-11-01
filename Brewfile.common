@@ -25,4 +25,7 @@ cask "claude-code"
 cask "codex"
 cask "claude"
 cask "google-chrome"
+# LINE is distributed through the Mac App Store; no line cask is available.
+brew "mas"
+mas "LINE", id: 539883307
 cask "tailscale-app"
